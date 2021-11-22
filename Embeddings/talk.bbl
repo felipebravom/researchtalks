@@ -1,0 +1,20 @@
+\begin{thebibliography}{}
+
+\bibitem[Ansell et~al., 2021]{ansell2021polylm}
+Ansell, A., Bravo-Marquez, F., and Pfahringer, B. (2021).
+\newblock Polylm: Learning about polysemy through language modeling.
+\newblock In {\em Proceedings of the 16th Conference of the European Chapter of
+  the Association for Computational Linguistics: Main Volume}, pages 563--574.
+
+\bibitem[Badilla et~al., 2020]{badilla2020wefe}
+Badilla, P., Bravo-Marquez, F., and P{\'e}rez, J. (2020).
+\newblock Wefe: The word embeddings fairness evaluation framework.
+\newblock In {\em IJCAI}, pages 430--436.
+
+\bibitem[Bravo-Marquez et~al., 2021]{bravo2021incremental}
+Bravo-Marquez, F., Khanchandani, A., and Pfahringer, B. (2021).
+\newblock Incremental word vectors for time-evolving sentiment lexicon
+  induction.
+\newblock {\em Cognitive Computation}, pages 1--17.
+
+\end{thebibliography}
