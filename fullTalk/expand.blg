@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d (TeX Live 2013)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: expand.aux
+The style file: abbrv.bst
+Database file #1: bio.bib
+A bad cross reference---entry "Wiebe2000"
+refers to entry "DBLP:conf/coling/2000", which doesn't exist
+Warning--I didn't find a database entry for "DBLP:conf/coling/2000"
+Warning--to sort, need editor, organization, or key in avaya2013
+You've used 32 entries,
+            2118 wiz_defined-function locations,
+            718 strings with 10859 characters,
+and the built_in function-call counts, 12446 in all, are:
+= -- 1271
+> -- 549
+< -- 17
++ -- 215
+- -- 180
+* -- 826
+:= -- 1956
+add.period$ -- 109
+call.type$ -- 32
+change.case$ -- 178
+chr.to.int$ -- 0
+cite$ -- 33
+duplicate$ -- 532
+empty$ -- 992
+format.name$ -- 180
+if$ -- 2741
+int.to.chr$ -- 0
+int.to.str$ -- 32
+missing$ -- 33
+newline$ -- 161
+num.names$ -- 66
+pop$ -- 202
+preamble$ -- 1
+purify$ -- 149
+quote$ -- 0
+skip$ -- 394
+stack$ -- 0
+substring$ -- 759
+swap$ -- 167
+text.length$ -- 17
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 123
+warning$ -- 1
+while$ -- 119
+width$ -- 34
+write$ -- 377
+(There was 1 error message)

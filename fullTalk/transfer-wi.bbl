@@ -1,0 +1,24 @@
+\begin{thebibliography}{}
+
+\bibitem[Kiritchenko et~al., 2014]{NRCJAIR14}
+Kiritchenko, S., Zhu, X., and Mohammad, S.~M. (2014).
+\newblock Sentiment analysis of short informal texts.
+\newblock {\em Journal of Artificial Intelligence Research}, 50:723--762.
+
+\bibitem[Mintz et~al., 2009]{Mintz2009}
+Mintz, M., Bills, S., Snow, R., and Jurafsky, D. (2009).
+\newblock Distant supervision for relation extraction without labeled data.
+\newblock In {\em Proceedings of the Joint Conference of the 47th Annual
+  Meeting of the ACL and the 4th International Joint Conference on Natural
+  Language Processing of the AFNLP: Volume 2 - Volume 2}, ACL '09, pages
+  1003--1011, Stroudsburg, PA, USA. Association for Computational Linguistics.
+
+\bibitem[Read, 2005]{Read2005}
+Read, J. (2005).
+\newblock Using emoticons to reduce dependency in machine learning techniques
+  for sentiment classification.
+\newblock In {\em Proceedings of the ACL Student Research Workshop}, ACLstudent
+  '05, pages 43--48, Stroudsburg, PA, USA. Association for Computational
+  Linguistics.
+
+\end{thebibliography}

@@ -1,0 +1,19 @@
+Talks 
+- Introduce SOcial Media
+- Introudce Sentiment Analysis
+- Main problem: 
+  Message-level Polarity Classification
+  Solution: Supervised Machine Learning
+  Limitations: Data annotation, domain, time
+  
+- Resources that can be exploited 
+  -Prior Lexical Knowledge. - Lexical Semantics - Semantic Orientation  Lexicons, rules, features.
+  - Unlabelled tweets
+
+Polarity Lexicon Induction
+				    Message polarity classification
+				    
+				    
+They have been commonly addressed by training supervised models from labelled data. The main limitation of these models is the high cost of data annotation.
+
+Discuss Limtiations, e.g., ASA and TCM limited to handle opinion shifters negations, implicit, sarcasm, 

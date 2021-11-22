@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d (TeX Live 2019/dev/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: UAI_talk.aux
+The style file: apalike.bst
+Database file #1: ../bio.bib
+A bad cross reference---entry "FelboMSRL17"
+refers to entry "DBLP:conf/emnlp/2017", which doesn't exist
+Warning--I didn't find a database entry for "DBLP:conf/emnlp/2017"
+You've used 17 entries,
+            1935 wiz_defined-function locations,
+            594 strings with 8471 characters,
+and the built_in function-call counts, 9513 in all, are:
+= -- 983
+> -- 385
+< -- 17
++ -- 135
+- -- 133
+* -- 737
+:= -- 1483
+add.period$ -- 61
+call.type$ -- 17
+change.case$ -- 149
+chr.to.int$ -- 17
+cite$ -- 17
+duplicate$ -- 414
+empty$ -- 671
+format.name$ -- 152
+if$ -- 2024
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 17
+newline$ -- 88
+num.names$ -- 53
+pop$ -- 173
+preamble$ -- 1
+purify$ -- 149
+quote$ -- 0
+skip$ -- 331
+stack$ -- 0
+substring$ -- 729
+swap$ -- 142
+text.length$ -- 13
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 102
+warning$ -- 0
+while$ -- 80
+width$ -- 0
+write$ -- 239
+(There was 1 error message)

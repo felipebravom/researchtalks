@@ -1,0 +1,211 @@
+\begin{thebibliography}{10}
+
+\bibitem{avaya2013}
+{\em AVAYA: Sentiment Analysis on Twitter with Self-Training and Polarity
+  Lexicon Expansion}, Second Joint Conference on Lexical and Computational
+  Semantics (*SEM), Volume 2: Proceedings of the Seventh International Workshop
+  on Semantic Evaluation (SemEval 2013). Association for Computational
+  Linguistics, 2013.
+
+\bibitem{Baccianella2010}
+S.~Baccianella, A.~Esuli, and F.~Sebastiani.
+\newblock Sentiwordnet 3.0: An enhanced lexical resource for sentiment analysis
+  and opinion mining.
+\newblock In N.~C.~C. Chair), K.~Choukri, B.~Maegaard, J.~Mariani, J.~Odijk,
+  S.~Piperidis, M.~Rosner, and D.~Tapias, editors, {\em Proceedings of the
+  Seventh International Conference on Language Resources and Evaluation
+  (LREC'10)}, Valletta, Malta, may 2010. European Language Resources
+  Association (ELRA).
+
+\bibitem{bifet2010}
+A.~Bifet and E.~Frank.
+\newblock Sentiment knowledge discovery in twitter streaming data.
+\newblock In {\em Proceedings of the 13th international conference on Discovery
+  science}, DS'10, pages 1--15, Berlin, Heidelberg, 2010. Springer-Verlag.
+
+\bibitem{BravoMarquez2014}
+F.~Bravo-Marquez, M.~Mendoza, and B.~Poblete.
+\newblock Meta-level sentiment models for big social data analysis.
+\newblock {\em Knowledge-Based Systems}, 69(0):86 -- 99, 2014.
+
+\bibitem{Esuli2005}
+A.~Esuli and F.~Sebastiani.
+\newblock Determining the semantic orientation of terms through gloss
+  classification.
+\newblock In {\em Proceedings of the 14th ACM International Conference on
+  Information and Knowledge Management}, CIKM '05, pages 617--624, New York,
+  NY, USA, 2005. ACM.
+
+\bibitem{esuli2006}
+A.~Esuli and F.~Sebastiani.
+\newblock Sentiwordnet: A publicly available lexical resource for opinion
+  mining.
+\newblock In {\em In Proceedings of the 5th Conference on Language Resources
+  and Evaluation (LREC'06}, pages 417--422, 2006.
+
+\bibitem{twitterNLP}
+K.~Gimpel, N.~Schneider, B.~O'Connor, D.~Das, D.~Mills, J.~Eisenstein,
+  M.~Heilman, D.~Yogatama, J.~Flanigan, and N.~A. Smith.
+\newblock Part-of-speech tagging for twitter: Annotation, features, and
+  experiments.
+\newblock In {\em Proceedings of the 49th Annual Meeting of the Association for
+  Computational Linguistics: Human Language Technologies: short papers-Volume
+  2}, pages 42--47. Association for Computational Linguistics, 2011.
+
+\bibitem{go2010}
+A.~Go, R.~Bhayani, and L.~Huang.
+\newblock Twitter sentiment classification using distant supervision.
+\newblock {\em CS224N Project Report, Stanford}, 2009.
+
+\bibitem{Hatziva1997}
+V.~Hatzivassiloglou and K.~R. McKeown.
+\newblock Predicting the semantic orientation of adjectives.
+\newblock In {\em Proceedings of the 35th Annual Meeting of the Association for
+  Computational Linguistics and Eighth Conference of the European Chapter of
+  the Association for Computational Linguistics}, ACL '98, pages 174--181,
+  Stroudsburg, PA, USA, 1997. Association for Computational Linguistics.
+
+\bibitem{Wiebe2000}
+V.~Hatzivassiloglou and J.~Wiebe.
+\newblock Effects of adjective orientation and gradability on sentence
+  subjectivity.
+\newblock In {\em COLING}, pages 299--305, 2000.
+
+\bibitem{Liu2004}
+M.~Hu and B.~Liu.
+\newblock {Mining and summarizing customer reviews}.
+\newblock In {\em Proceedings of the tenth ACM SIGKDD international conference
+  on Knowledge discovery and data mining}, KDD '04, pages 168--177, New York,
+  NY, USA, 2004. ACM.
+
+\bibitem{jiang2011target}
+L.~Jiang, M.~Yu, M.~Zhou, X.~Liu, and T.~Zhao.
+\newblock Target-dependent twitter sentiment classification.
+\newblock In {\em Proceedings of the 49th Annual Meeting of the Association for
+  Computational Linguistics: Human Language Technologies-Volume 1}, pages
+  151--160. Association for Computational Linguistics, 2011.
+
+\bibitem{kamps2004}
+J.~Kamps, M.~Marx, R.~J. Mokken, and M.~De~Rijke.
+\newblock {Using WordNet to Measure Semantic Orientation of Adjectives}.
+\newblock In {\em Proceedings of the International Conference on Language
+  Resources and Evaluation (LREC)}, volume~4, pages 1115--1118. European
+  Language Resources Association (ELRA), May 2004.
+
+\bibitem{Kim2004}
+S.-M. Kim and E.~Hovy.
+\newblock Determining the sentiment of opinions.
+\newblock In {\em Proceedings of the 20th international conference on
+  Computational Linguistics}, COLING '04, Stroudsburg, PA, USA, 2004.
+  Association for Computational Linguistics.
+
+\bibitem{kouloumpis2011twitter}
+E.~Kouloumpis, T.~Wilson, and J.~Moore.
+\newblock Twitter sentiment analysis: The good the bad and the omg!
+\newblock {\em ICWSM}, 11:538--541, 2011.
+
+\bibitem{LiuBook}
+B.~Liu.
+\newblock {\em Sentiment Analysis and Opinion Mining}.
+\newblock Synthesis Lectures on Human Language Technologies. Morgan {\&}
+  Claypool Publishers, 2012.
+
+\bibitem{Saaif2012}
+S.~Mohammad and P.~D. Turney.
+\newblock Crowdsourcing a word-emotion association lexicon.
+\newblock {\em Computational Intelligence}, 29(3):436--465, 2013.
+
+\bibitem{Mohammad2013}
+S.~M. Mohammad, S.~Kiritchenko, and X.~Zhu.
+\newblock Nrc-canada: Building the state-of-the-art in sentiment analysis of
+  tweets.
+\newblock {\em Proceedings of the seventh international workshop on Semantic
+  Evaluation Exercises (SemEval-2013)}, 2013.
+
+\bibitem{nadeau2003inference}
+C.~Nadeau and Y.~Bengio.
+\newblock Inference for the generalization error.
+\newblock {\em Machine Learning}, 52(3):239--281, 2003.
+
+\bibitem{Finn2011}
+F.~r. Nielsen.
+\newblock {A new ANEW: Evaluation of a word list for sentiment analysis in
+  microblogs}.
+\newblock In {\em ESWC2011 Workshop on Making Sense of Microposts}, May 2011.
+
+\bibitem{nigam2006semi}
+K.~Nigam, A.~McCallum, and T.~Mitchell.
+\newblock Semi-supervised text classification using em.
+\newblock {\em Semi-Supervised Learning}, pages 33--56, 2006.
+
+\bibitem{pak2010twitter}
+A.~Pak and P.~Paroubek.
+\newblock {Twitter as a corpus for sentiment analysis and opinion mining}.
+\newblock {\em Proceedings of LREC 2010}, 2010.
+
+\bibitem{Petrovic2010}
+S.~Petrovi{\'c}, M.~Osborne, and V.~Lavrenko.
+\newblock The edinburgh twitter corpus.
+\newblock In {\em Proceedings of the NAACL HLT 2010 Workshop on Computational
+  Linguistics in a World of Social Media}, WSA '10, pages 25--26, Stroudsburg,
+  PA, USA, 2010. Association for Computational Linguistics.
+
+\bibitem{stone66}
+P.~J. Stone, D.~C. Dunphy, M.~S. Smith, and D.~M. Ogilvie.
+\newblock {\em The General Inquirer: A Computer Approach to Content Analysis}.
+\newblock MIT Press, Cambridge, MA, 1966.
+
+\bibitem{ThelwallBP12}
+M.~Thelwall, K.~Buckley, and G.~Paltoglou.
+\newblock Sentiment strength detection for the social web.
+\newblock {\em JASIST}, 63(1):163--173, 2012.
+
+\bibitem{Turney2002}
+P.~D. Turney.
+\newblock Thumbs up or thumbs down?: semantic orientation applied to
+  unsupervised classification of reviews.
+\newblock In {\em Proceedings of the 40th Annual Meeting on Association for
+  Computational Linguistics}, ACL '02, pages 417--424, Stroudsburg, PA, USA,
+  2002. Association for Computational Linguistics.
+
+\bibitem{turney2003measuring}
+P.~D. Turney and M.~L. Littman.
+\newblock Measuring praise and criticism: Inference of semantic orientation
+  from association.
+\newblock {\em ACM Transactions on Information Systems (TOIS)}, 21(4):315--346,
+  2003.
+
+\bibitem{wilks1998grammar}
+Y.~Wilks and M.~Stevenson.
+\newblock The grammar of sense: Using part-of-speech tags as a first step in
+  semantic disambiguation.
+\newblock {\em Natural Language Engineering}, 4(02):135--143, 1998.
+
+\bibitem{Wilson2005}
+T.~Wilson, J.~Wiebe, and P.~Hoffmann.
+\newblock {Recognizing Contextual Polarity in Phrase-Level Sentiment Analysis}.
+\newblock In {\em Proceedings of Human Language Technologies
+  Conference/Conference on Empirical Methods in Natural Language Processing
+  (HLT/EMNLP 2005)}, Vancouver, CA, 2005.
+
+\bibitem{Zhang2004}
+T.~Zhang.
+\newblock Solving large scale linear prediction problems using stochastic
+  gradient descent algorithms.
+\newblock In {\em Proceedings of the Twenty-first International Conference on
+  Machine Learning}, ICML '04, pages 116--, New York, NY, USA, 2004. ACM.
+
+\bibitem{Zhou2014}
+Z.~Zhou, X.~Zhang, and M.~Sanderson.
+\newblock Sentiment analysis on twitter through topic-based lexicon expansion.
+\newblock In H.~Wang and M.~Sharaf, editors, {\em Databases Theory and
+  Applications}, volume 8506 of {\em Lecture Notes in Computer Science}, pages
+  98--109. Springer International Publishing, 2014.
+
+\bibitem{Zirn20011}
+C.~Zirn, M.~Niepert, H.~Stuckenschmidt, and M.~Strube.
+\newblock Fine-grained sentiment analysis with structural features.
+\newblock In {\em Proceedings of the 5th International Joint Conference on
+  Natural Language Processing (IJCNLP)}, pages 336--344, 2011.
+
+\end{thebibliography}

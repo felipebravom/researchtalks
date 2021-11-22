@@ -1,0 +1,4 @@
+\babel@toc {english}{}
+\beamer@sectionintoc {1}{CV}{2}{0}{1}
+\beamer@sectionintoc {2}{My Research}{13}{0}{2}
+\beamer@sectionintoc {3}{Academic Plan}{20}{0}{3}

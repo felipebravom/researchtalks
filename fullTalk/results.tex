@@ -1,0 +1,48 @@
+Tester:     weka.experiment.PairedCorrectedTTester
+Analysing:  PERCENT_CORRECT
+Datasets:   3
+Resultsets: 13
+Confidence: 0.05 (two tailed)
+Sorted by:  -
+Date:       19/09/14 2:06 PM
+
+
+\begin{table}[thb]
+\caption{\label{labelname}Table Caption}
+\scriptsize
+{\centering \begin{tabular}{lr@{\hspace{0cm}}c@{\hspace{0cm}}rr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.1cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.1cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.1cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.1cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.1cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.1cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.1cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.1cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.1cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.1cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.1cm}}cr@{\hspace{0cm}}c@{\hspace{0cm}}r@{\hspace{0.1cm}}c}
+\\
+\hline
+Dataset & \multicolumn{3}{c}{(13)}& \multicolumn{4}{c}{(1)} & \multicolumn{4}{c}{(2)} & \multicolumn{4}{c}{(3)} & \multicolumn{4}{c}{(4)} & \multicolumn{4}{c}{(5)} & \multicolumn{4}{c}{(6)} & \multicolumn{4}{c}{(7)} & \multicolumn{4}{c}{(8)} & \multicolumn{4}{c}{(9)} & \multicolumn{4}{c}{(10)} & \multicolumn{4}{c}{(11)} & \multicolumn{4}{c}{(12)} \\
+\hline
+Neutrality & 65.16 & $\pm$ & 2.09 & 57.10 & $\pm$ & 2.47 & $\bullet$ & 56.79 & $\pm$ & 2.49 & $\bullet$ & 62.70 & $\pm$ & 2.22 & $\bullet$ & 64.01 & $\pm$ & 2.35 &           & 46.85 & $\pm$ & 2.31 & $\bullet$ & 61.17 & $\pm$ & 2.19 & $\bullet$ & 63.38 & $\pm$ & 2.40 & $\bullet$ & 64.91 & $\pm$ & 2.31 &           & 63.97 & $\pm$ & 2.14 & $\bullet$ & 51.95 & $\pm$ & 2.94 & $\bullet$ & 57.33 & $\pm$ & 2.54 & $\bullet$ &       &       &      &          \\
+PosNeg & 76.04 & $\pm$ & 2.72 & 76.03 & $\pm$ & 2.99 &           & 72.72 & $\pm$ & 2.98 & $\bullet$ & 75.66 & $\pm$ & 2.91 &           & 74.15 & $\pm$ & 3.25 & $\bullet$ & 75.44 & $\pm$ & 2.87 &           & 74.52 & $\pm$ & 2.52 & $\bullet$ & 74.43 & $\pm$ & 2.49 & $\bullet$ & 71.93 & $\pm$ & 2.62 & $\bullet$ & 75.05 & $\pm$ & 3.09 &           & 75.50 & $\pm$ & 3.01 &           & 73.19 & $\pm$ & 2.87 & $\bullet$ & 56.03 & $\pm$ & 0.23 & $\bullet$\\
+Polarity & 61.93 & $\pm$ & 2.10 & 60.03 & $\pm$ & 2.09 & $\bullet$ & 55.26 & $\pm$ & 2.31 & $\bullet$ & 60.24 & $\pm$ & 2.10 & $\bullet$ & 55.48 & $\pm$ & 2.42 & $\bullet$ & 58.74 & $\pm$ & 1.91 & $\bullet$ & 57.86 & $\pm$ & 2.23 & $\bullet$ & 58.60 & $\pm$ & 2.36 & $\bullet$ & 58.07 & $\pm$ & 2.31 & $\bullet$ & 60.14 & $\pm$ & 2.57 & $\bullet$ & 57.79 & $\pm$ & 2.33 & $\bullet$ & 58.77 & $\pm$ & 2.23 & $\bullet$ &       &       &      &          \\
+\hline
+\multicolumn{39}{c}{$\circ$, $\bullet$ statistically significant improvement or degradation}\\
+\end{tabular} \scriptsize \par}
+\end{table}
+
+
+\begin{table}[thb]
+\caption{\label{labelname}Table Caption (Key)}
+\scriptsize
+{\centering
+\begin{tabular}{cl}\\
+(1) & functions.LibLINEAR '-S 7 -C 1.0 -E 0.01 -B 1.0 -P' 230504711 \\
+(2) & rules.OneR '-B 6' -3459427003147861443 \\
+(3) & trees.RandomForest '-I 100 -K 0 -S 1 -num-slots 1' 1116839470751428698 \\
+(4) & trees.J48 '-C 0.25 -M 2' -217733168393644444 \\
+(5) & meta.AttributeSelectedClassifier '-E \textbackslash"InfoGainAttributeEval \textbackslash" -S \textbackslash"Ranker -T -1.7976931348623157E308 -N 1\textbackslash" -W functions.LibLINEAR -- -S 1 -C 1.0 -E 0.01 -B 1.0' -1151805453487947577 \\
+(6) & meta.AttributeSelectedClassifier '-E \textbackslash"InfoGainAttributeEval \textbackslash" -S \textbackslash"Ranker -T -1.7976931348623157E308 -N 2\textbackslash" -W trees.J48 -- -C 0.25 -M 2' -1151805453487947577 \\
+(7) & meta.AttributeSelectedClassifier '-E \textbackslash"CfsSubsetEval -P 1 -E 1\textbackslash" -S \textbackslash"BestFirst -D 1 -N 5\textbackslash" -W trees.J48 -- -C 0.25 -M 2' -1151805453487947577 \\
+(8) & meta.FilteredClassifier '-F \textbackslash"unsupervised.attribute.RemoveByName -E ^so.*\textbackslash" -W trees.J48 -- -C 0.25 -M 2' -4523450618538717400 \\
+(9) & meta.FilteredClassifier '-F \textbackslash"unsupervised.attribute.RemoveByName -E ^sgd.*\textbackslash" -W trees.J48 -- -C 0.25 -M 2' -4523450618538717400 \\
+(10) & meta.FilteredClassifier '-F \textbackslash"unsupervised.attribute.RemoveByName -E ^sgd.*\textbackslash" -W functions.LibLINEAR -- -S 1 -C 1.0 -E 0.01 -B 1.0' -4523450618538717400 \\
+(11) & meta.FilteredClassifier '-F \textbackslash"unsupervised.attribute.RemoveByName -E ^so.*\textbackslash" -W functions.LibLINEAR -- -S 1 -C 1.0 -E 0.01 -B 1.0' -4523450618538717400 \\
+(12) & meta.GridSearch '-E CC -y-property classifier.gamma -y-min -3.0 -y-max 3.0 -y-step 1.0 -y-base 10.0 -y-expression pow(BASE,I) -filter AllFilter -x-property classifier.cost -x-min -3.0 -x-max 3.0 -x-step 1.0 -x-base 10.0 -x-expression pow(BASE,I) -sample-size 100.0 -traversal COLUMN-WISE -log-file /home/fjb11/remoteExp/remote-engine -num-slots 1 -S 1 -W functions.LibSVM -- -S 0 -K 2 -D 3 -G 0.0 -R 0.0 -N 0.5 -M 40.0 -C 1.0 -E 0.001 -P 0.1 -model /home/fjb11/remoteExp/remote-engine' -3034773968581595348 \\
+(13) & meta.GridSearch '-E ACC -y-property classifier.gamma -y-min -3.0 -y-max 3.0 -y-step 1.0 -y-base 10.0 -y-expression pow(BASE,I) -filter AllFilter -x-property classifier.cost -x-min -3.0 -x-max 3.0 -x-step 1.0 -x-base 10.0 -x-expression pow(BASE,I) -sample-size 100.0 -traversal COLUMN-WISE -log-file /home/fjb11/remoteExp/remote-engine -num-slots 1 -S 1 -W functions.LibSVM -- -S 0 -K 2 -D 3 -G 0.0 -R 0.0 -N 0.5 -M 40.0 -C 1.0 -E 0.001 -P 0.1 -model /home/fjb11/remoteExp/remote-engine' -3034773968581595348 \\
+\end{tabular}
+}
+\end{table}
+

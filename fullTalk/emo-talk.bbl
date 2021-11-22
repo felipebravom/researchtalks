@@ -1,0 +1,31 @@
+\begin{thebibliography}{}
+
+\bibitem[Bollen et~al., 2011]{bollen2011twitter}
+Bollen, J., Mao, H., and Zeng, X. (2011).
+\newblock Twitter mood predicts the stock market.
+\newblock {\em Journal of Computational Science}, 2(1):1--8.
+
+\bibitem[Mohammad and Turney, 2013]{Mohammad2013a}
+Mohammad, S. and Turney, P.~D. (2013).
+\newblock Crowdsourcing a word-emotion association lexicon.
+\newblock {\em Computational Intelligence}, 29(3):436--465.
+
+\bibitem[Mohammad and Kiritchenko, 2015]{hashemo2015}
+Mohammad, S.~M. and Kiritchenko, S. (2015).
+\newblock Using hashtags to capture fine emotion categories from tweets.
+\newblock {\em Computational Intelligence}, 31(2):301--326.
+
+\bibitem[Read et~al., 2011]{read2011classifier}
+Read, J., Pfahringer, B., Holmes, G., and Frank, E. (2011).
+\newblock Classifier chains for multi-label classification.
+\newblock {\em Machine learning}, 85(3):333--359.
+
+\bibitem[Zaragoza et~al., 2011]{ZaragozaSMBL11}
+Zaragoza, J.~H., Sucar, L.~E., Morales, E.~F., Bielza, C., and Larra{\~{n}}aga,
+  P. (2011).
+\newblock Bayesian chain classifiers for multidimensional classification.
+\newblock In {\em {IJCAI} 2011, Proceedings of the 22nd International Joint
+  Conference on Artificial Intelligence, Barcelona, Catalonia, Spain, July
+  16-22, 2011}, pages 2192--2197. AAAI Press.
+
+\end{thebibliography}

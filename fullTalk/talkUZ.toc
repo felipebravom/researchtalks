@@ -1,0 +1,5 @@
+\babel@toc {english}{}
+\beamer@sectionintoc {1}{Introduction}{2}{0}{1}
+\beamer@sectionintoc {2}{Polarity Lexicon Induction}{4}{0}{2}
+\beamer@sectionintoc {3}{Distant Supervision}{14}{0}{3}
+\beamer@sectionintoc {4}{Conclusions}{24}{0}{4}

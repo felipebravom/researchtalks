@@ -1,0 +1,386 @@
+
+%\documentclass[mathserif]{beamer}
+\documentclass[handout]{beamer}
+%\usetheme{Goettingen}
+%\usetheme{Warsaw}
+\usetheme{Singapore}
+
+
+
+%\usetheme{Frankfurt}
+%\usetheme{Copenhagen}
+%\usetheme{Szeged}
+%\usetheme{Montpellier}
+%\usetheme{CambridgeUS}
+%\usecolortheme{}
+%\setbeamercovered{transparent}
+\usepackage[english, activeacute]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb}
+\usepackage{dsfont}
+\usepackage{graphics}
+\usepackage{cases}
+\usepackage{graphicx}
+\usepackage{pgf}
+\usepackage{epsfig}
+\usepackage{amssymb}
+\usepackage{multirow}	
+\usepackage{amstext}
+\usepackage[ruled,vlined,lined]{algorithm2e}
+\usepackage{amsmath}
+\usepackage{epic}
+\usepackage{epsfig}
+\usepackage{fontenc}
+\usepackage{framed,color}
+\usepackage{palatino, url, multicol}
+%\algsetup{indent=2em}
+\newcommand{\factorial}{\ensuremath{\mbox{\sc Factorial}}}
+\newcommand{\BIGOP}[1]{\mathop{\mathchoice%
+{\raise-0.22em\hbox{\huge $#1$}}%
+{\raise-0.05em\hbox{\Large $#1$}}{\hbox{\large $#1$}}{#1}}}
+\newcommand{\bigtimes}{\BIGOP{\times}}
+\vspace{-0.5cm}
+\title{Overview of Twitter Sentiment Analysis Research \\ OR \\}
+\subtitle{Using Sentiment Analysis as a Case Study for Introducing Modern NLP Concepts}
+\vspace{-0.5cm}
+\author[Felipe Bravo Márquez]{\footnotesize
+%\author{\footnotesize  
+ \textcolor[rgb]{0.00,0.00,1.00}{Felipe Bravo-Marquez}} 
+  
+ 
+%\vspace{-0.3cm}
+\institute{Department of Computer Science, University of Waikato }
+
+\titlegraphic{\includegraphics[scale=0.3]{pics/logo.pdf}}
+
+
+
+\date{\today}
+
+\begin{document}
+\begin{frame}
+\titlepage
+
+
+\end{frame}
+
+
+\section{Introduction}
+
+
+\begin{frame}{Disclaimer}
+
+ This talk is heavily based on this book!
+   \begin{figure}[h]
+        	\includegraphics[scale = 0.4]{pics/goldbergNLP.jpg}
+        \end{figure}
+
+ 
+\end{frame}
+
+
+
+\begin{frame}{Social Media}
+\begin{scriptsize}
+\begin{itemize}
+ \item Microblogging services are increasingly being adopted by people in order to access and publish information.  
+ \item \textbf{Twitter}: Massively used Microblogging platform where users post messages limited to 140 characters referred to as \textbf{tweets}. 
+ \item  Tweets can be used to convey  emotions,  opinions, and  stance.
+\end{itemize}
+
+\begin{figure}[htbp]
+\begin{center}
+\scalebox{0.7}{
+\begin{tabular}{cc}
+\includegraphics[scale=0.2]{pics/twitter.png} & \includegraphics[scale=0.2]{pics/wheel_th.jpg} \\
+\end{tabular}}
+\end{center}
+\end{figure}
+
+\end{scriptsize}
+\end{frame}
+
+
+
+\begin{frame}{Sentiment Analysis and Social Media}
+\begin{scriptsize}
+\begin{itemize}
+ \item Opinions are provided \textbf{freely and voluntarily} by the users in Twitter. 
+ \item Analysing the sentiment underlying these opinions has important applications in product \textbf{marketing} and \textbf{politics}.
+ 
+   \begin{figure}[h]
+        	\includegraphics[scale = 0.6]{pics/tweetOpinions.png}
+        \end{figure}
+\end{itemize}
+\end{scriptsize}
+
+
+
+
+\end{frame}
+
+
+\begin{frame}{Opinion Mining or Sentiment Analysis}
+\begin{scriptsize}\begin{itemize}
+ \item Application of \textbf{NLP} and \textbf{text mining} techniques to identify and extract subjective information from textual datasets.
+\end{itemize}
+
+\begin{block}{Main Problem: Message-level Polarity Classification (MPC)}
+  \begin{enumerate}
+   \item Automatically classify a tweet to classes \textcolor[rgb]{0.00,0.00,1.00}{\textbf{positive}}, \textcolor[rgb]{1.00,0.00,0.00}{\textbf{negative}}, or \textcolor[rgb]{0.00,1.00,0.00}{\textbf{neutral}}. 
+   
+     \begin{figure}[h]
+        	\includegraphics[scale = 0.15]{pics/sent.png}
+        \end{figure}
+   
+   \item State-of-the-art solutions use \textbf{supervised} machine learning models trained from \textbf{manually} annotated examples \cite{Mohammad2013}.
+  \end{enumerate} 
+\end{block}
+
+\end{scriptsize}
+
+\end{frame}
+
+\begin{frame}{Other Tasks}
+
+\begin{itemize}
+
+  \item Stance Detection: detect if the author of a tweet is in favor, against or neutral regarding a give target (e.g., Donald Trump). 
+   \item Irony/Sarcasm Detection: detecting sarcasm in tweets.
+   \item Emotions classification: classify tweets according to multiple emotions (e.g., anger, fear, sadness, joy)
+   \item  Infer emotion intensities (numerical values) in tweets (e.g., degree of anger).
+   \item Affective\footnote{We will use the term ``\textbf{affect}'' to encompass sentiment, emotions, and other related concepts.} Lexicon Induction: classification of words into affective dimensions. 
+
+\item Many of these tasks have been evaluated as part of \textbf{SemEval}.
+
+\end{itemize}
+
+
+\end{frame}
+
+
+
+\begin{frame}{Drawbacks of Supervised models}
+\begin{scriptsize}
+  \begin{itemize}
+   \item \textbf{Label sparsity (LS)}: manual annotation is \textbf{labour-intensive} and \textbf{time-consuming}. 
+   \item \textbf{Concept drift}: the sentiment pattern can vary from one collection to another (domain-drift, temporal-drift).
+ 
+ \item A classifier trained from tweets annotated for one domain will \textbf{not necessarily} work on another one! 
+\item Trained models can become outdated over time.
+  \end{itemize} 
+
+
+
+\begin{block}{Examples of domain-Drift}
+\begin{enumerate}
+\item  For me the queue was pretty \textcolor[rgb]{0.00,0.00,1.00}{\textbf{small}} and it was only a 20 minute wait I think but was so worth it!!! :D @raynwise
+\item Odd spatiality in Stuttgart. Hotel room is so  \textcolor[rgb]{1.00,0.00,0.00}{\textbf{small}} I can barely turn around but surroundings are inhumanly vast \& long under construction.
+\end{enumerate}
+\end{block}
+
+
+\end{scriptsize}
+
+\end{frame}
+
+\begin{frame}{Label Sparsity}
+\begin{scriptsize}
+
+\begin{itemize}
+\item A possible approach to \textbf{overcome} the sentiment-drift problem is to 
+\textbf{constantly update} the sentiment classifier with \textbf{recent labelled data} \cite{bifet2010, Silva2011}.
+
+\item The high arrival rates of social streams make the continuous acquirement of sentiment labels \textbf{infeasible} \cite{Silva2011, calais2011bias,Guerra2014}. 
+\end{itemize}
+
+\end{scriptsize}
+
+\end{frame}
+
+
+\begin{frame}{Approaches to overcome label sparsity}
+\begin{scriptsize}
+\begin{block}{Distant Supervision}
+  \begin{itemize}
+   \item Automatically \textbf{label} unlabelled data (\textbf{Twitter API}) using a heuristic method.
+   \item \textbf{Emoticon-Annotation Approach (EAA)}: tweets with positive \textcolor[rgb]{0.00,0.00,1.00}{\textbf{:)}} or negative \textcolor[rgb]{1.00,0.00,0.00}{\textbf{:(}} emoticons are labelled according to the polarity indicated by the emoticon~\cite{Read2005}.
+  \item The emoticon is \textbf{removed} from the content.
+  \item The same approach has been extended to Hashtags \#anger, and emojis.
+\item Drawback: emoticons can induce noisy and incomplete information. Moreover they are not necessarily used in all domains (e.g., politics). 
+\end{itemize} 
+ 
+\end{block}
+
+\begin{block}{Crowdsourcing}
+  \begin{itemize}
+\item Rely on services like \textbf{Amazon Mechanical Turk} or \textbf{Crowdflower} to ask the \textbf{crowds} to label a sample of the data on a demand-driven basis.
+\item This can be expensive for online sentiment analysis (label sparsity problem). 
+   \end{itemize} 
+ 
+\end{block}
+
+\end{scriptsize}
+
+\end{frame}
+
+\begin{frame}{Roadmap}
+\begin{scriptsize}
+\begin{itemize}
+\item In this talk we will overview various approaches tackling the main sentiment analysis problems.
+\item We will also introduce modern concepts in natural language processing based on \textbf{neural networks} such as \textbf{word embeddings}, \textbf{convolutional neural networks} (CNNs), and \textbf{Long short-term memory networks} (LSTMs).
+\end{itemize} 
+
+\end{scriptsize}
+
+\end{frame}
+
+
+\section{Affective Lexicon Induction}
+\input{lexicons}
+
+
+
+\section{Message-level Sentiment Classification}
+\input{message-level}
+
+\section{Other Neural Network Architectures}
+
+
+\begin{frame}{Recursive Neural Networks over Sentiment Treebank}
+\begin{scriptsize}
+\begin{itemize}
+\item A recursive neural tensor network for learning the sentiment of pieces of texts of different granularities, such as words, phrases, and sentences, was proposed in~\cite{socher2013recursive}.
+\item The network was trained on a sentiment annotated treebank \url{http://nlp.stanford.edu/sentiment/treebank.html} of parsed sentences for learning compositional vectors of words and phrases.
+\item Every node in the parse tree receives a vector, and there is a matrix capturing how the meaning of adjacent nodes changes. 
+\item The network is trained using a variation of backpropagation called Backprop through Structure.
+\item The main drawback of this model is that it relies on parsing.
+\end{itemize}
+\end{scriptsize}
+\end{frame}
+
+
+
+\begin{frame}{Recursive Neural Networks over Sentiment Treebank}
+   
+    \begin{figure}[h]
+        	\includegraphics[scale = 0.45]{pics/recTensor1.png}
+        \end{figure}       
+        
+\end{frame}
+
+
+\begin{frame}{Recursive Neural Networks over Sentiment Treebank}
+   
+    \begin{figure}[h]
+        	\includegraphics[scale = 0.45]{pics/recTensor2.png}
+        \end{figure}       
+        
+\end{frame}
+
+
+
+\begin{frame}{Paragraph vector}
+% See dissapointment slide http://videolectures.net/deeplearning2015_manning_deep_learning/
+\begin{scriptsize}
+\begin{itemize}
+\item A paragraph vector-embedding model that learns vectors for sequences of words of arbitrary length (e.g, sentences, paragraphs, or documents) without relying on parsing was proposed in~\cite{LeM14}. 
+\item The paragraph vectors are obtained by training a similar network as the one used for training the CBOW embeddings. 
+\item The words surrounding a centre word in a window are used as input together with a paragraph-level vector for predict the centre word. 
+\item The paragraph-vector acts as a memory token that is used for all the centre words in the paragraph during the training the phase. 
+\item The recursive neural tensor network and the paragraph-vector embedding were evaluated on the same movie review dataset used in \cite{Pang2002}, obtaining an accuracy of 85.4\% and 87.8\%, respectively. 
+\item Both models outperformed the results obtained by classifiers trained on representations based on bag-of-words features.
+\item Many researchers have have  struggled  to  reproduce these paragraph vectors \cite{lau2016empirical}.  
+\end{itemize}
+\end{scriptsize}
+\end{frame}
+
+
+\begin{frame}{Paragraph vector}
+   
+    \begin{figure}[h]
+        	\includegraphics[scale = 0.45]{pics/doc2vec.png}
+        \end{figure}       
+        
+\end{frame}
+
+
+\begin{frame}{Summary}
+\begin{scriptsize}
+\begin{itemize}
+\item  WASSA 2017 Shared Task in Emotion Intensity: given a tweet an emotion X (anger, fear, joy, or sadness) determine the intensity or degree of emotion X felt by the speaker—a real-valued score between 0 and 1. 
+\item English tweets were annotated using Best-Worst scaling.
+\item Twenty-two teams participated.  Best system: ensemble of deep learning models (r = 0.74).
+\item SemEval 2018 Task 1: Affect in Tweets. Extension of previous task including VAD emotions and two more languages: Spanish and Arabic.
+\item AffectiveTweets Weka Package
+\end{itemize}
+\end{scriptsize}
+
+
+\end{frame}
+
+
+
+
+
+\begin{frame}{Other projects}
+\begin{scriptsize}
+\begin{itemize}
+\item  WASSA 2017 Shared Task in Emotion Intensity: given a tweet an emotion X (anger, fear, joy, or sadness) determine the intensity or degree of emotion X felt by the speaker—a real-valued score between 0 and 1. 
+\item English tweets were annotated using Best-Worst scaling.
+\item Twenty-two teams participated.  Best system: ensemble of deep learning models (r = 0.74).
+\item SemEval 2018 Task 1: Affect in Tweets. Extension of previous task including VAD emotions and two more languages: Spanish and Arabic.
+\item AffectiveTweets Weka Package
+\end{itemize}
+\end{scriptsize}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.2]{pics/affectiveTweetsLogo.png}
+\end{figure}
+
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Questions?}
+%\vspace{1.5cm}
+\begin{center}\LARGE Thanks for your Attention!\\ \end{center}
+
+\begin{columns}
+\begin{column}{0.55\textwidth}
+\begin{block}{Acknowledgments}
+\begin{itemize}\tiny
+	\item University of Waikato Doctoral Scholarship
+	\item Machine Learning Group at the University of Waikato
+	
+\end{itemize}
+\end{block}
+\end{column}
+\begin{column}{0.45\textwidth}
+\vspace{1.5cm}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.3]{pics/logo.pdf}
+\end{figure}
+\end{column}
+\end{columns}
+
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]\scriptsize
+\frametitle{References}
+\bibliography{../bio}
+\bibliographystyle{apalike}
+%\bibliographystyle{flexbib}
+\end{frame}  
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

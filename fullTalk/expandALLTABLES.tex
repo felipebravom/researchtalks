@@ -1,0 +1,571 @@
+\documentclass{sig-alternate}
+
+\usepackage{times}
+
+\usepackage{url}
+\urlstyle{it}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{subfig}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{textcomp}
+\usepackage{framed,color}
+% Paragraphs
+\newcommand{\spara}[1]{\smallskip\noindent{\bf #1}}
+\newcommand{\mpara}[1]{\medskip\noindent{\bf #1}}
+\newcommand{\para}[1]{\noindent{\bf #1}}
+
+\clubpenalty=10000
+\widowpenalty=10000
+
+%% Define a new 'leo' style for the package that will use a smaller font.
+\makeatletter
+\def\url@leostyle{%
+  
+\@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\scriptsize\ttfamily}}}
+\makeatother
+%% Now actually use the newly defined style.
+\urlstyle{leo}
+
+
+
+
+\begin{document}
+%\conferenceinfo{WISDOM'13,}{August 11 2013, Chicago, IL, USA}
+ 
+
+%\crdata{978-1-4503-2332-1/13/08}
+%\CopyrightYear{2013}
+
+% Place holder, can be changed if wanted
+\title{ A time-series classification model for Twitter opinion lexicon expansion}
+
+\numberofauthors{3}
+\author{
+% You can go ahead and credit any number of authors here,
+% e.g. one 'row of three' or two rows (consisting of one row of three
+% and a second row of one, two or three).
+%
+% The command \alignauthor (no curly braces needed) should
+% precede each author name, affiliation/snail-mail address and
+% e-mail address. Additionally, tag each line of
+% affiliation/address with \affaddr, and tag the
+% e-mail address with \email.
+%
+% 1st. author
+\alignauthor
+Felipe Bravo-Marquez\\
+	\affaddr{Department of Computer Science, University of Waikato, New Zealand}\\
+	\email{fjb11@students.waikato.ac.nz}
+\alignauthor Eibe Frank\\
+       \affaddr{Department of Computer Science, University of Waikato, New Zealand}\\
+       \email{eibe@waikato.ac.nz}
+\alignauthor Bernhard Pfahringer\\
+       \affaddr{Department of Computer Science, University of Waikato, New Zealand}\\
+       \email{bernhard@waikato.ac.nz}
+}
+
+
+
+\maketitle
+
+\begin{abstract}
+Opinion lexicons, which are lists of terms labelled by sentiment, are widely used resources to support automatic sentiment analysis of textual passages. However, these resources exhibit important limitations when applied to social media messages such as tweets (posts in Twitter), because they are unable to capture the diversity of informal expressions commonly found in this type of media. In this article, we propose a process to automatically categorise Twitter words into three sentiment classes: positive, neutral, and negative. The expansion is done through a supervised learning process in which word-level attributes are calculated from a multi-dimensional time-series, and a seed lexicon of labelled words is used as the training dataset. The time-series are extracted from a temporal collection of automatically labelled tweets representing the relationship between the word and the sentiment expressed in the tweets where it occurs. Our experimental results show that our method outperforms the word-level sentiment classification performance obtained by semantic orientation, a well known state-of-the-art measure for establishing world-level sentiment. Additionally, we show that our expanded lexicon produces significant improvements when used for message-level polarity classification of tweets.
+
+
+\end{abstract}
+
+\category{I.2.7.7}{Artificial Intelligence}{Natural Language Processing}[Text Analysis]
+
+\terms{Experimentation, Measurement}
+
+\keywords{Lexicon Expansion, Twitter}
+
+
+\section{Introduction}\label{sec:intro}
+
+Several sentiment analysis methods rely on lexical resources for evaluating the sentiment of a text passage, in particular they often rely on an opinion lexicon. An opinion or sentiment lexicon is a dictionary of opinion words with their corresponding sentiment values. Lexicons can be used to compute the polarity of a message by aggregating the orientation values of the opinion words found in the document \cite{Wiebe2000}. They have also proven to be useful when used to extract features in supervised classification schemes~\cite{jiang2011target, kouloumpis2011twitter,Zirn20011}. 
+
+Social media platforms and, in particular, microblogging services such as \textbf{Twitter}\footnote{\url{http://www.twitter.com}}, are increasingly being adopted by people to access and publish information about a great variety of topics. Sentiment analysis applied to social media posts has received an increasing interest due to its importance in a wide range of fields such as business, sports, and politics. However, the language used in Twitter provides substantial challenges for sentiment analysis. The words used in this platform include many abbreviations, acronyms, and misspelled words which are not observed in traditional media and are not covered by most popular lexicons such as OpinionFinder \cite{Wilson2005}, SentiWordnet \cite{esuli2006}, and the Harvard General Inquirer \cite{stone66}. The diversity and sparseness of these informal words make the manually creation of a Twitter-oriented opinion lexicon a time-consuming task.
+
+% Words can be positive, negative, or neutral depending on the context
+
+In this article we propose a supervised framework for opinion lexicon expansion for the language used in Twitter.  Taking SentiWordnet as inspiration, each word in our expanded lexicon has a probability distribution, describing how positive, negative, and neutral it is.  Additionally, all the entries of the lexicon are associated with a corresponding part-of-speech tag. We believe that estimating the sentiment distribution of POS-tagged words according the three opinion-related properties may be useful for developing Twitter-specific sentiment applications due to the following reasons:
+
+\begin{enumerate}
+%\item There are some words in which its opinion-related properties can change from one domain to another, e.g., the word \emph{small} is positive when referring to a queue in a bank but negative when referring to a hotel room. These type of words could be represented by having probabilities greater than zero for both positive and negative classes.
+\item A word can present certain levels of intensity \cite{ThelwallBP12} for a specific sentiment category e.g., the word \emph{awesome} is more positive than the word \emph{adequate}. The estimated probabilities could be used to represent these levels of intensities.
+
+\item  The neutral score provided by the lexicon could be useful for discarding non-opinion words in text-level polarity classification tasks. This can be easily done  taking the class with the maximum probability and discarding words classified as neutral. On the other hand, unsupervised lexicon expansion techniques such as semantic orientation \cite{Turney2002} provide a single numerical score for each word. It is no clear how to find a threshold for using this score in neutrality detection. 
+
+\item   Homographs, which are  words that share the same spelling but have different meanings, should  have different lexicon entries for each different meaning. By relying on POS-tagged words, homographs with different POS-tags will be disambiguated \cite{wilks1998grammar}. For instance, the word \emph{apple}  will receive different sentiment scores when used to refer to a common noun (a fruit) or a proper noun (a company). 
+
+\end{enumerate}
+
+
+The proposed methodology takes a collection of tweets labelled according to their polarity to establish a polarity-related time series for each POS-tagged word in the tweets and uses features extracted from this time series in relation with the labels provided by a seed lexicon to train a word-level sentiment classifier. The seed lexicon is taken from the union of different hand-made lexicons after discarding all polarity clashes from the intersection. Furthermore, the tweets from the collection are labelled using two semi-supervised heuristics to avoid the expensive costs of data annotation: \emph{emoticon-based annotation} and \emph{consensus of methods}. In the former approach, only tweets having positive or negative emoticons are considered and labelled according to the polarity indicated by the emoticon \cite{go2010}. In the second approach, the tweets are classified into classes positive, negative and neutral using two sentiment analysis tools: \emph{SentiStrength}\footnote{\url{http://sentistrength.wlv.ac.uk/}} and \emph{Sentiment140}\footnote{\url{http://www.sentiment140.com/}}. Afterwards, all tweets in which both methods disagree are discarded. Our word-level time series are computed from two different criteria: Semantic Orientation (SO) \cite{Turney2002}, which is based on the mutual information between word and sentiment class, and Stochastic Gradient Descent (SGD) score, which learns a linear relationship between word and sentiment class.
+
+The proposed procedure can be summarised in the following steps:
+
+\begin{enumerate}
+\item Collect tweets from the domain and the time period for which the lexicon needs to be expanded. 
+\item Label the collection with sentiment classes in an automatic way.
+\item Tag all the words using a part-of-speech tagger.
+\item Calculate word-level time-series for all tagged words and extract sentiment features from them.
+\item Label the sentiment of the words that match an existing hand-made polarity lexicon.
+\item Train a word-level classifier using the word-level features and the words labels from the seed lexicon.
+\item Use the trained classifier to estimate the polarity distribution of the remaining unlabelled words.
+\end{enumerate}
+ 
+%Briefly explain the experiments 
+As will be discussed in Section~\ref{sec:related}, the automatic expansion of Twitter  opinion words has been studied before \cite{Mohammad2013, avaya2013, Zhou2014}. In all these works, the expansion was conducted using semantic orientation, which is an unsupervised measure.  
+To the best of our knowledge, this is the first article in which the lexicon expansion of Twitter opinion words is studied and evaluated using POS disambiguation and supervised learning. Additionally, this is the first study in which scores for positive, negative, and neutral opinion-related properties are provided for Twitter-specific expressions.
+
+
+%It is important to remark that a supervised word labelling approach based on a seed lexicon provides flexibility in determining the desired nature of the polarity label of the expanded words. For instance, we can compute a categorical label through classification or a numerical score through regression. On the other hand, when the lexicon is created from  unsupervised measures such as semantic orientation is it not clear how to transform these values into the desired labels.  
+
+
+%This is the first study comparing two different mechanisms for automatic labelling tweets for lexicon expansion (Emoticon Labels and Consensus of methods).
+
+%This is the first study combining the semantic orientation measure with POS tags (POS tags were used before as filters to discard words from POS that are unlikely to express an opinion). This is the first study in Twitter lexicon expansion including the detection of neutral words. This is the first study in which semantic orientation is compared and combined with SGD scores. 
+ 
+We test our approach on three collections of automated labelled tweets. Our results indicate that our supervised framework outperforms the classification accuracy obtained by  semantic orientation when the detection of neutral words is included. We also evaluate the usefulness of the expanded lexicon for message-level polarity classification of tweets, showing significant improvements in performance.   
+ 
+This article in organised as follows. In Section~\ref{sec:related} we provide a review of existing work in opinion lexicon expansion. In Section~\ref{sec:seed_lex} we explain the mechanisms studied to automatically create collections of labelled tweets. In Section~\ref{sec:tweetlab} we describe the seed lexicon used to label the words for the training set. The creation of our word-level time-series is described in Section~\ref{sec:feat}, together with the features used for training the classifier. In Section~\ref{sec:experiments} we present the experiments we conducted to evaluate the proposed approach and we also discuss the obtained results. The main findings and conclusions are discussed in Section~\ref{sec:conc}.
+
+\section{Related Work}\label{sec:related}
+There are basically two type of resources which can be exploited for lexicon expansion: a  thesaurus and a corpus of documents. The most simple approach using a thesaurus such as WordNet\footnote{\url{http://wordnet.princeton.edu/}} is to expand a seed lexicon of labelled opinion words using synonyms and antonyms from the lexical relations provided by the thesaurus 
+\cite{Liu2004,Kim2004}. The hypothesis behind this approach is that synonyms may have the same polarity and antonyms may have the opposite. This process is normally iterated several times.
+In \cite{kamps2004} a graph was created using WordNet adjectives as vertices and the synonym relation as edges. The orientation of a term is determined by its relative distance from two seed terms \emph{good} and \emph{bad}. In \cite{Esuli2005} a supervised classifier was trained using a seed of labelled words which was obtained through synonyms and antonyms expansion. For each word a vector space model is created from the definition or \emph{gloss} provided by the WordNet dictionary. This representation is used to train a word-level classifier which is used for lexicon expansion. An equivalent approach was applied later to create SentiWordnet\footnote{\url{http://sentiwordnet.isti.cnr.it/}} in \cite{esuli2006, Baccianella2010}. In SentiWordNet each WordNet \emph{synset} or group of synonyms is  annotated into classes positive, negative and neutral in the range $[0,1]$.    
+
+A limitation of thesaurus-based approaches is their inability to capture domain dependent words. On the other hand, corpus-based approaches exploit syntactic or co-occurrence patterns to expand the lexicon to the words found within a collection of documents. 
+In \cite{Hatziva1997} the proposed method starts with a set of adjectives whose polarity is known and then discover the polarities of new adjectives using some linguistic patterns from a corpus of documents. They show, using a log-linear regression, that conjunctions between adjectives provide indirect information about the orientation. For example, adjectives connected with the conjunction ``and'' tend to have the same orientation and adjectives connected with the conjunction ``but'' tend to have opposite orientation. This approach allows the extraction of domain-dependent information and the adaptation to new domains when the corpus of documents is changed. 
+
+In \cite{Turney2002, turney2003measuring}, the expansion is done through a measure referred to as the \emph{semantic orientation} which is based on the the point-wise mutual information (PMI) between two random variables:
+\begin{equation}
+ \operatorname{PMI}(term_{1}, term_{2})= \log_{2} \left ( \frac{Pr(term_{1} \wedge term_{2})}{Pr(term_{1})Pr(term_{2})} \right )
+\end{equation}
+
+The semantic orientation of a word is the difference between the PMI of the word with a positive emotion and a negative emotion. Different ways have been proposed to represent the joint probabilities of words and emotions. In Turney's work they are estimated using the number of hits returned by a search engine in response to a query composed of the target word together with the word ``excellent'' and on other query using the word ``poor'' in the same way.  
+The same idea was used for Twitter lexicon expansion in 
+\cite{Mohammad2013, avaya2013, Zhou2014}. All these works model the joint probabilities from collections of tweets labelled in automatic ways:
+
+\begin{equation}
+ \operatorname{SO}(word) = log_2 \left( \frac{\operatorname{hits}(\text{word,pos}) \times \operatorname{hits}(\text{neg})}{\operatorname{hits}(\text{word,neg}) \times \operatorname{hits}(\text{pos})}\right)
+\end{equation}
+
+In \cite{avaya2013} the tweets are labelled from a trained classifier using thresholds for the different classes to ensure high precision. In \cite{Zhou2014}  tweets are labelled from emoticons to create domain-specific lexicons. In \cite{Mohammad2013} tweets are labelled from emoticons and hashtags associated with emotions to create two different lexicons. These lexicons were tested for tweet-level polarity classification. 
+
+
+%Several researchers claim that general purpose lexical resources cannot reflect domain-specific language usage \cite{Choi2009}. This means that the word polarities of the expanded lexicon will reflect the domains found in the collection from which the lexicon is built. 
+
+
+\section{Ground-Truth word polarities}\label{sec:seed_lex}
+In this Section we describe the seed lexicon used to label the training dataset. There are two main properties that vary from one lexicon to another: the way in which the lexicon is built and the nature of the sentiment label. Lexicons can be created manually or automatically. Manually created lexicons tend to be smaller and less noisy than automatically made lexicons \cite{BravoMarquez2014}.  The labels can be categorical with classes -positive, negative, and neutral- (in some cases neutral words are not considered) or numerical, representing the strength of the polarity (e.g., from -5 to 5). The labels can also express additional emotional states.
+
+In this work we use a general-purpose lexicon obtained by mixing the following hand-made lexicons:
+\begin{itemize}
+\item OpinionFinder: positive, negative, and neutral words. \cite{Wilson2005}
+\item Bing Liu: positive and negative words \footnote{http://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html}.
+\item Afinn:  \cite{Finn2011} words scored from -5 to 5 (no neutral words)
+\item NRC emotion Lexicon: positive, negative, neutral, and other emotions which are not considered. \cite{Saaif2012} 
+\end{itemize}
+
+We create a metalexicon by taking the union of these resources and discarding all words where a polarity clash is observed. In this way, we create a large hand-made lexicon including positive, negative, and neutral words that exhibits a minimum level of noise. The words are labelled according to the metalexicon.  Table~\ref{tab:lexstats}
+
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{|l|r|r|r|}
+\hline
+ & \multicolumn{1}{l|}{Positive} & \multicolumn{1}{l|}{Negative} & \multicolumn{1}{l|}{Neutral} \\ \hline
+AFINN & 564 & 964 & 0 \\ 
+Bing Liu & 2003 & 4782 & 0 \\ 
+OpinionFinder & 2295 & 4148 & 424 \\ 
+NRC-Emo & 2312 & 3324 & 7714 \\ \hline
+Union & 4331 & 7004 & 8013 \\ 
+Meta-Lex & 3730 & 6368 & 7088 \\ \hline
+\end{tabular}
+\end{center}
+\caption{Lexicon Statistics}
+\label{tab:lexstats}
+\end{table}
+
+
+
+% POS tags are not provided
+
+\section{Automated labelled tweets}\label{sec:tweetlab}
+
+
+We study two different ways for creating a collection of automatically labelled tweets. 
+The first one is the emoticon based approach in which tweets with positive and negative emoticons are collected and labelled according to the emoticon's polarity. The problem of this approach is its inability to capture neutral tweets. 
+
+The second approach applied a consensus of methods. It considers tweets labelled using two different methods: Sentiment140 and SentiStrength, according to classes positive, negative, and neutral, and discards all tweets where the two methods disagree. 
+
+\section{Word-level sentiment features}\label{sec:feat}
+
+Our features exploit the temporal structure from one collection of tweets. We simulate a stream from the sorted tweets and create two different time series for each word observed in the vocabulary. The first time series is calculated from a SGD online learning process using the hinge loss function with $\lambda$ equal to $0.1$. Each observation corresponds to the weight of the linear model for a time window.  The second time series corresponds to the accumulated semantic orientation of the word in the window. We use windows of $1,000$ examples. We then create features for learning based on this time series data.
+
+The attributes explored so far are the following from both SGD and SO time series:
+\begin{enumerate}
+\item means: the mean of the series.
+\item trunc.means: a trimmed mean of the series after removing the 10 percent of the most extreme elements.
+\item medians: the median.
+\item Last element: the last observation of the time series.\footnote{Note that the last element of the SO series is equivalent to the traditional SO measure.}
+\item sds: standard deviation .
+\item sg: fraction of times the time series changes its sign.
+\item iqr: Inter-quartile range.
+\item sg\_diff: the fraction of times the differenced time series $t_n - t_{n-1}$ changes its sign.
+
+\end{enumerate}
+The statistics of these two time series are used as features to train a world-level polarity classifier. In addition to this, we include the POS tag of the word as a nominal attribute.
+
+
+\section{Experiments}\label{sec:experiments}
+
+In this section we present our experimental results for word-level polarity classification. Tweets from the Edinburgh corpus were labelled according to the emoticon approach explained in Section~\ref{sec:tweetlab}. All the labelled tweets were tokenized and tagged according to POS tags using the TwitterNLP library. The features from all the words described in Section~\ref{sec:feat} were calculated and the fraction of the words that matched the metalexicon were labelled according to the lexicon's polarities. A plot of the mean values of SGD and SO scores for the three different categories -positive, negative, and neutral- is shown in Figure~\ref{fig:sosgd}.
+
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.4]{sosgd.pdf}
+	\caption{SO SGD}
+	\label{fig:sosgd}
+\end{figure}
+
+
+
+
+
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.3]{sosgdSub.pdf}
+	\caption{SO SGD}
+	\label{fig:sosgdSub}
+\end{figure}
+
+
+
+\begin{figure}[ht]
+\begin{center}
+\begin{tabular}{cc}
+\includegraphics[scale=0.25]{negwords.pdf}
+&
+\includegraphics[scale=0.25]{poswords.pdf}\\
+(a) & (b)  
+\end{tabular}
+\caption{\textbf{WordClouds of positive and negative words }}
+\label{fig:scatter}
+\end{center}
+\end{figure}
+
+
+
+From the figure we can observe that both variables are highly correlated with each other (0.858). We can also observe that as negative words tend to show low values of SGD and SO, positive words tend to show the opposite. Neutral words are more spread out and hard to distinguish. 
+
+We study three word-level classification problems: 1) Neutrality: neutral vs non neutral words, 2) PosNeg: positive vs negative words, and 3) Polarity: neutral vs positive vs negative.
+
+The information gain values obtained for the different attributes in relation to the three classification tasks are shown in Table~\ref{tab:infogains}.
+ 
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+ & Neutrality & PosNeg & Polarity \\ 
+  \hline
+sgd.means & 0.082 & 0.233 & 0.200 \\ 
+  sgd.trunc.means & 0.079 & 0.237 & 0.201 \\ 
+  sgd.medians & 0.075 & 0.233 & 0.193 \\ 
+  sgd.last.element & 0.057 & 0.177 & 0.155 \\ 
+  sgd.sds & 0.020 & 0.038 & 0.034 \\ 
+  sgd.sg & 0.029 & 0.000 & 0.030 \\ 
+  sgd.iqr & 0.018 & 0.012 & 0.019 \\ 
+  sgd.sg\_diff & 0.000 & 0.000 & 0.008 \\ 
+  so.means & 0.079 & 0.283 & 0.219 \\ 
+  so.trunc.means & 0.077 & 0.284 & 0.215 \\ 
+  so.medians & 0.077 & 0.281 & 0.215 \\ 
+  so.last.element & 0.069 & 0.279 & 0.211 \\ 
+  so.sds & 0.000 & 0.015 & 0.008 \\ 
+  so.sg & 0.013 & 0.216 & 0.126 \\ 
+  so.iqr & 0.000 & 0.000 & 0.000 \\ 
+  so.sg\_diff & 0.000 & 0.012 & 0.009 \\ 
+  pos.label & 0.062 & 0.017 & 0.071 \\ 
+   \hline
+\end{tabular}
+\caption{Information Gain Values Edimburgh} 
+\label{tab:infogains}
+\end{table}
+
+
+
+% Tue Sep 30 13:49:10 2014
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+ & Neutrality & PosNeg & Polarity \\ 
+  \hline
+sgd.means & 0.104 & 0.276 & 0.246 \\ 
+  sgd.trunc.means & 0.104 & 0.276 & 0.242 \\ 
+  sgd.medians & 0.097 & 0.275 & 0.239 \\ 
+  sgd.last.element & 0.086 & 0.258 & 0.221 \\ 
+  sgd.sds & 0.030 & 0.030 & 0.052 \\ 
+  sgd.sg & 0.049 & 0.017 & 0.062 \\ 
+  sgd.iqr & 0.015 & 0.014 & 0.017 \\ 
+  sgd.sg\_diff & 0.005 & 0.000 & 0.000 \\ 
+  so.means & 0.081 & 0.301 & 0.232 \\ 
+  so.trunc.means & 0.079 & 0.300 & 0.229 \\ 
+  so.medians & 0.076 & 0.300 & 0.228 \\ 
+  so.last.element & 0.084 & 0.300 & 0.240 \\ 
+  so.sds & 0.000 & 0.012 & 0.007 \\ 
+  so.sg & 0.019 & 0.239 & 0.142 \\ 
+  so.iqr & 0.000 & 0.008 & 0.000 \\ 
+  so.sg\_diff & 0.000 & 0.000 & 0.000 \\ 
+  pos.label & 0.068 & 0.016 & 0.076 \\ 
+   \hline
+\end{tabular}
+\caption{Information Gain Values STS} 
+\end{table}
+
+
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+ & Neutrality & PosNeg & Polarity \\ 
+  \hline
+sgd.means & 0.070 & 0.247 & 0.207 \\ 
+  sgd.trunc.means & 0.070 & 0.250 & 0.204 \\ 
+  sgd.medians & 0.071 & 0.251 & 0.206 \\ 
+  sgd.last.element & 0.073 & 0.248 & 0.205 \\ 
+  sgd.sds & 0.063 & 0.040 & 0.083 \\ 
+  sgd.sg & 0.018 & 0.008 & 0.027 \\ 
+  sgd.iqr & 0.046 & 0.031 & 0.065 \\ 
+  sgd.sg\_diff & 0.016 & 0.008 & 0.019 \\ 
+  so.means & 0.088 & 0.305 & 0.256 \\ 
+  so.trunc.means & 0.088 & 0.302 & 0.255 \\ 
+  so.medians & 0.089 & 0.298 & 0.256 \\ 
+  so.last.element & 0.094 & 0.323 & 0.264 \\ 
+  so.sds & 0.018 & 0.029 & 0.034 \\ 
+  so.sg & 0.027 & 0.194 & 0.130 \\ 
+  so.iqr & 0.006 & 0.019 & 0.014 \\ 
+  so.sg\_diff & 0.033 & 0.017 & 0.038 \\ 
+  pos.label & 0.049 & 0.014 & 0.056 \\ 
+   \hline
+\end{tabular}
+\caption{Information Gain Values Consensus} 
+\end{table}
+
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+ & Neutrality & PosNeg & Polarity \\ 
+  \hline
+sgd.means & 0.103 & 0.009 & 0.106 \\ 
+  sgd.trunc.means & 0.103 & 0.009 & 0.107 \\ 
+  sgd.medians & 0.103 & 0.010 & 0.107 \\ 
+  sgd.last.element & 0.103 & 0.010 & 0.106 \\ 
+  sgd.sds & 0.099 & 0.010 & 0.102 \\ 
+  sgd.sg & 0.065 & 0.009 & 0.070 \\ 
+  sgd.iqr & 0.084 & 0.000 & 0.082 \\ 
+  sgd.sg\_diff & 0.020 & 0.000 & 0.024 \\ 
+  so.means & 0.103 & 0.000 & 0.105 \\ 
+  so.trunc.means & 0.103 & 0.000 & 0.105 \\ 
+  so.medians & 0.103 & 0.000 & 0.106 \\ 
+  so.last.element & 0.103 & 0.000 & 0.105 \\ 
+  so.sds & 0.046 & 0.010 & 0.049 \\ 
+  so.sg & 0.027 & 0.000 & 0.027 \\ 
+  so.iqr & 0.028 & 0.009 & 0.031 \\ 
+  so.sg\_diff & 0.039 & 0.000 & 0.040 \\ 
+  pos.label & 0.049 & 0.014 & 0.056 \\ 
+   \hline
+\end{tabular}
+\caption{Information Gain Values Consesus Neutral non Neutral Feaut} 
+\end{table}
+
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+ & Neutrality & PosNeg & Polarity \\ 
+  \hline
+sgd.last.posneg & 0.073 & 0.248 & 0.205 \\ 
+  sgd.means.posneg & 0.070 & 0.247 & 0.207 \\ 
+  sgd.trunc.means.posneg & 0.070 & 0.250 & 0.204 \\ 
+  sgd.medians.posneg & 0.071 & 0.251 & 0.206 \\ 
+  sgd.sds.posneg & 0.063 & 0.040 & 0.083 \\ 
+  sgd.sign\_changes.posneg & 0.018 & 0.008 & 0.027 \\ 
+  sgd.sign\_changes\_diff.posneg & 0.016 & 0.008 & 0.019 \\ 
+  sgd.iqr.posneg.posneg & 0.046 & 0.031 & 0.065 \\ 
+  so.last.posneg & 0.094 & 0.323 & 0.264 \\ 
+  so.means.posneg & 0.088 & 0.305 & 0.256 \\ 
+  so.trunc.means.posneg & 0.088 & 0.302 & 0.255 \\ 
+  so.medians.posneg & 0.089 & 0.298 & 0.256 \\ 
+  so.sds.posneg & 0.018 & 0.029 & 0.034 \\ 
+  so.sign\_changes.posneg & 0.027 & 0.194 & 0.130 \\ 
+  so.sign\_changes\_diff.posneg & 0.033 & 0.017 & 0.038 \\ 
+  so.iqr.posneg.posneg & 0.006 & 0.019 & 0.014 \\ 
+  sgd.last.neutral & 0.103 & 0.010 & 0.106 \\ 
+  sgd.means.neutral & 0.103 & 0.009 & 0.106 \\ 
+  sgd.trunc.means.neutral & 0.103 & 0.009 & 0.107 \\ 
+  sgd.medians.neutral & 0.103 & 0.010 & 0.107 \\ 
+  sgd.sds.neutral & 0.099 & 0.010 & 0.102 \\ 
+  sgd.sign\_changes.neutral & 0.065 & 0.009 & 0.070 \\ 
+  sgd.sign\_changes\_diff.neutral & 0.020 & 0.000 & 0.024 \\ 
+  sgd.iqr.neutral.neutral & 0.084 & 0.000 & 0.082 \\ 
+  so.last.neutral & 0.103 & 0.000 & 0.105 \\ 
+  so.means.neutral & 0.103 & 0.000 & 0.105 \\ 
+  so.trunc.means.neutral & 0.103 & 0.000 & 0.105 \\ 
+  so.medians.neutral & 0.103 & 0.000 & 0.106 \\ 
+  so.sds.neutral & 0.046 & 0.010 & 0.049 \\ 
+  so.sign\_changes.neutral & 0.027 & 0.000 & 0.027 \\ 
+  so.sign\_changes\_diff.neutral & 0.039 & 0.000 & 0.040 \\ 
+  so.iqr.neutral.neutral & 0.028 & 0.009 & 0.031 \\ 
+  pos.label & 0.049 & 0.014 & 0.056 \\ 
+   \hline
+\end{tabular}
+\caption{Information Consensus Full} 
+\end{table}
+
+
+We can observe that variables measuring the central tendency of the SO and SGD time series tend to be more informative than the ones measuring deviance. Moreover, the information gain values of these variables are much higher for PosNeg than for neutrality. As SGD and SO are competitive measures for neutrality, SO tends to be better for PosNeg. The average values of SO and SGD are better than the last values especially in SGD. We can also see that POS tags are useful for neutrality detection, but are useless for PosNeg. Therefore, we can conclude that positive and negative words have a similar distribution of POS tags. 
+
+
+The accuracy of the classification experiments are presented in Table~\ref{tab:classres}. 
+
+
+
+
+
+
+
+
+\begin{table*}[htbp]
+\begin{center}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\multicolumn{ 6}{|c|}{} \\ 
+\multicolumn{ 6}{|c|}{Accuracy } \\ \hline
+Dataset & SO & ALL & SGD.TS+POS & SO.TS+POS & SO+POS \\ \hline
+ED-Neutrality & 61.52 $\pm$ 2.21 & \textbf{65.16 $\pm$ 2.09} $\circ$ & 64.55 $\pm$ 2.27 $\circ$ & 64.9 $\pm$ 2.14  $\circ$ & 64.18 $\pm$ 2.12 $\circ$ \\ 
+ED-PosNeg & 74.78 $\pm$ 2.93 & \textbf{76.04 $\pm$ 2.72} & 73.61 $\pm$ 2.51 & 75.6 $\pm$ 2.84 & 74.99 $\pm$ 2.72 \\ 
+ED-Polarity & 59.48 $\pm$ 2.29 & \textbf{61.93 $\pm$ 2.1 $\circ$} & 60.97 $\pm$ 1.96 & 61.73 $\pm$ 1.98 $\circ$ & 61.57 $\pm$ 2.04 $\circ$ \\  \hline
+STS-Neutrality & 62.99 $\pm$ 2.03 & \textbf{66.2 $\pm$ 2.11 $\circ$} & 65.26 $\pm$ 2.34 $\circ$ & 65.73 $\pm$ 1.98 $\circ$ & 65.77 $\pm$ 2.09 $\circ$ \\ 
+STS-PosNeg & \textbf{77.18 $\pm$ 2.88} & 76.98 $\pm$ 2.82 & 75.39 $\pm$ 2.89 $\bullet$ & 76.76 $\pm$ 2.89 & 76.98 $\pm$ 2.71 \\ 
+STS-Polarity & 60.2 $\pm$ 2.23 & \textbf{62.74 $\pm$ 1.52} $\circ$ & 62.34 $\pm$ 1.61 $\circ$ & 62.14 $\pm$ 1.73 $\circ$ & 62.1 $\pm$ 1.78 $\circ$ \\  \hline
+CON-Neutrality & 61.07 $\pm$ 2.72 & \textbf{66.26 $\pm$ 2.54} $\circ$ & 64.18 $\pm$ 2.24  $\circ$ & 65.96 $\pm$ 2.48 $\circ$ & 64.80 $\pm$ 2.46 $\circ$ \\ 
+CON-PosNeg & 75.82 $\pm$ 2.97 & \textbf{76.50 $\pm$ 3.1} & 70.20 $\pm$ 2.92 $\bullet$  & 76.06 $\pm$ 3.11  & 75.59 $\pm$ 2.95 \\ 
+CON-Polarity & 58.42 $\pm$ 1.99 & 61.21 $\pm$ 2.13 $\circ$ & 58.84 $\pm$ 2.02 & \textbf{62.01 $\pm$ 2.46} $\circ$ & 60.32 $\pm$ 2.44 $\circ$ \\ \hline
+\multicolumn{ 6}{|c|}{} \\ 
+\multicolumn{ 6}{|c|}{Weighted area under ROC } \\ \hline
+Dataset & SO & ALL & SGD.TS+POS & SO.TS+POS & SO+POS \\ \hline
+ED-Neutrality & 0.62 $\pm$ 0.02 &  \textbf{0.65 $\pm$ 0.02} $\circ$ & \textbf{0.65 $\pm$ 0.02} $\circ$  & \textbf{0.65 $\pm$ 0.02} $\circ$ & 0.64 $\pm$ 0.02 $\circ$ \\ 
+ED-PosNeg & 0.74 $\pm$ 0.03 & \textbf{0.75 $\pm$ 0.03} & 0.71 $\pm$ 0.03 $\bullet$ & 0.74 $\pm$ 0.03 & 0.73 $\pm$ 0.03 \\ 
+ED-Polarity & 0.62 $\pm$ 0.02 &  \textbf{0.65 $\pm$0.02} $\circ$ & 0.64 $\pm$ 0.02 & \textbf{0.65 $\pm$ 0.02} $\circ$ & 0.64 $\pm$ 0.02 $\circ$ \\ \hline
+STS-Neutrality & 0.63 $\pm$ 0.02 & \textbf{0.67 $\pm$ 0.02} $\circ$             & 0.66 $\pm$ 0.02 $\circ$  & 0.66 $\pm$ 0.02 $\circ$ & 0.66 $\pm$ 0.02$\circ$ \\ 
+STS-PosNeg & \textbf{0.77 $\pm$ 0.03} &  \textbf{0.77 $\pm$ 0.03} & 0.75 $\pm$ 0.03 $\bullet$ & \textbf{0.77 $\pm$ 0.03} & \textbf{0.77 $\pm$ 0.03} \\ 
+STS-Polarity & 0.64 $\pm$ 0.02 & \textbf{0.66 $\pm$ 0.01} $\circ$  & 0.65 $\pm$ 0.02 $\bullet$  & \textbf{0.66 $\pm$ 0.02} $\circ$ & \textbf{0.66 $\pm$ 0.02} $\circ$ \\ \hline
+CON-Neutrality & 0.61 $\pm$ 0.03 & \textbf{0.67 $\pm$ 0.03}  $\circ$ & 0.65 $\pm$ 0.02 $\circ$ & 0.66 $\pm$ 0.02  $\circ$ & 0.65 $\pm$ 0.02 $\circ$ \\ 
+CON-PosNeg & \textbf{0.76 $\pm$ 0.03} & \textbf{0.76 $\pm$ 0.03} & 0.70 $\pm$ 0.03 $\bullet$ & \textbf{0.76 $\pm$ 0.03} & 0.75 $\pm$ 0.03 \\ 
+CON-Polarity & 0.63 $\pm$ 0.02 & 0.65 $\pm$ 0.02 $\circ$ & 0.62 $\pm$ 0.02  & \textbf{0.66 $\pm$ 0.02}  $\circ$ & 0.64 $\pm$ 0.02 $\circ$ \\ \hline
+\end{tabular}
+\caption{World level classification accuracies} 
+\end{center}
+\label{}
+\end{table*}
+
+
+
+
+
+
+
+All the experiments were done using RBF SVM with a grid search procedure for parameter tuning. The evaluation was done using 10 times 10-folds-cross-validation and different sub-sets of attributes were compared.  All the methods are compared with the baseline of using the last value of the semantic orientation through a paired t-student test with an alpha level of $0.1$.   
+Results indicate that the combination of all the features leads a significant improvement in accuracy for neutrality classification.  In the PosNeg classification task we can see that the baseline is very strong. This suggests that the SO is very good for discriminating between positive and negative words. However, we can observe that when all attributes are combined a statistically significant improvement is achieved.
+
+
+
+
+
+\begin{table*}[htbp]
+
+\begin{center}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\multicolumn{ 6}{|c|}{} \\ 
+\multicolumn{ 6}{|c|}{Accuracy } \\ \hline
+Dataset & Baseline & ED & S140 & Cons & Combination \\ \hline
+6-coded & 71.79 $\pm$ 2.79 & 74.91 $\pm$ 2.56 $\circ$ & 75.11 $\pm$ 2.66 $\circ$ & 73.4 $\pm$ 2.81 $\circ$ & \textbf{75.74 $\pm$ 2.46} $\circ$ \\ 
+Sanders & 71.43 $\pm$ 3.76 & 77.17 $\pm$ 3.68 $\circ$ & 77.32 $\pm$ 4.09 $\circ$ & 77.58 $\pm$ 3.52 $\circ$ & \textbf{77.74 $\pm$ 3.57} $\circ$ \\ 
+SemEval & 76.81 $\pm$ 1.22 & 76.66 $\pm$ 1.38 & 77.7 $\pm$ 1.25 $\circ$ & 77.66 $\pm$ 1.34 $\circ$ & \textbf{78.37 $\pm$ 1.37} $\circ$ \\ \hline
+\multicolumn{ 6}{|c|}{} \\ 
+\multicolumn{ 6}{|c|}{Weighted area under ROC } \\ \hline
+Dataset & Baseline & ED & S140 & Cons & Combination \\ \hline
+6-coded & 0.77 $\pm$ 0.03 & 0.82 $\pm$ 0.03 $\circ$ & 0.82 $\pm$ 0.02 $\circ$ & 0.81 $\pm$ 0.03 $\circ$ & \textbf{0.83 $\pm$ 0.02} $\circ$ \\ 
+Sanders & 0.77 $\pm$ 0.04 & 0.83 $\pm$ 0.04 $\circ$ & 0.84 $\pm$ 0.04 $\circ$ & 0.83 $\pm$ 0.04 $\circ$ & \textbf{0.85 $\pm$ 0.04} $\circ$ \\ 
+SemEval & 0.77 $\pm$ 0.02 & 0.81 $\pm$ 0.02 $\circ$ & 0.83 $\pm$ 0.02 $\circ$ & 0.8 $\pm$ 0.02 $\circ$ & \textbf{0.83 $\pm$ 0.02} $\circ$ \\ \hline
+\end{tabular}
+\caption{Message Level Polarity Classification Accuracies using word probabilities}
+\end{center}
+\label{}
+\end{table*}
+
+
+
+
+
+\begin{table*}[htbp]
+\begin{center}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\multicolumn{ 6}{|c|}{} \\ 
+\multicolumn{ 6}{|c|}{Accuracy } \\ \hline
+Dataset & Baseline & ED & S140 & Cons & Combination \\ \hline
+6Coded & 71.79 $\pm$ 2.79 & 76.57 $\pm$ 2.3 $\circ$ & 75.28 $\pm$ 2.5 $\circ$ & 74.74 $\pm$ 2.51 $\circ$ & 77.36 $\pm$ 2.53 $\circ$ \\ 
+Sanders & 71.43 $\pm$ 3.76 & 76.78 $\pm$ 3.99 $\circ$ & 75.83 $\pm$ 4.19 $\circ$ & 75.81 $\pm$ 4.17 $\circ$ & 76.07 $\pm$ 3.92 $\circ$ \\ 
+SemEval & 76.81 $\pm$ 1.22 & 78.23 $\pm$ 1.3 $\circ$ & 77.07 $\pm$ 1.18 & 78.18 $\pm$ 1.25 $\circ$ & 79.4 $\pm$ 1.29 $\circ$ \\ \hline
+\multicolumn{ 6}{|c|}{} \\ 
+\multicolumn{ 6}{|c|}{Weighted area under ROC } \\ \hline
+Dataset & Baseline & ED & S140 & Cons & Combination \\ \hline
+6Coded & 0.77 $\pm$ 0.03 & 0.84 $\pm$ 0.02 $\circ$ & 0.82 $\pm$ 0.03 $\circ$ & 0.81 $\pm$ 0.03 $\circ$ & 0.85 $\pm$ 0.02 $\circ$ \\ 
+Sanders & 0.77 $\pm$ 0.04 & 0.83 $\pm$ 0.04 $\circ$ & 0.82 $\pm$ 0.04 $\circ$ & 0.82 $\pm$ 0.04 $\circ$ & 0.84 $\pm$ 0.04 $\circ$ \\ 
+SemEval & 0.77 $\pm$ 0.02 & 0.83 $\pm$ 0.02 $\circ$ & 0.82 $\pm$ 0.02 $\circ$ & 0.82 $\pm$ 0.02 $\circ$ & 0.85 $\pm$ 0.02 $\circ$ \\ \hline
+\end{tabular}
+\end{center}
+\caption{Message Level Polarity Classification Accuracies using word probabilities no Outliers}
+\label{}
+\end{table*}
+
+
+\begin{table*}[htbp]
+\begin{center}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+Dataset & Baseline & ED & S140 & Cons & Combination \\ \hline
+6Coded & 0.77 $\pm$ 0.03 & 0.84 $\pm$ 0.02 $\circ$ & 0.82 $\pm$ 0.03 $\circ$ & 0.81 $\pm$ 0.03 $\circ$ & 0.85 $\pm$ 0.02 $\circ$ \\ 
+Sanders & 0.77 $\pm$ 0.04 & 0.83 $\pm$ 0.04 $\circ$ & 0.82 $\pm$ 0.04 $\circ$ & 0.82 $\pm$ 0.04 $\circ$ & 0.84 $\pm$ 0.04 $\circ$ \\ 
+SemEval & 0.77 $\pm$ 0.02 & 0.83 $\pm$ 0.02 $\circ$ & 0.82 $\pm$ 0.02 $\circ$ & 0.82 $\pm$ 0.02 $\circ$ & 0.85 $\pm$ 0.02 $\circ$ \\ \hline
+\end{tabular}
+\end{center}
+\caption{Message Level Polarity Classification ROC using word probabilities no Outliers}
+\label{}
+\end{table*}
+
+
+
+\section{Conclusions}\label{sec:conc}
+
+
+\bibliographystyle{abbrv}
+\bibliography{bio}
+
+
+\end{document}

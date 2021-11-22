@@ -1,0 +1,213 @@
+\begin{thebibliography}{}
+
+\bibitem[Amir et~al., 2015]{amir2015SemEval}
+Amir, S., Ling, W., Astudillo, R., Martins, B., Silva, M.~J., and Trancoso, I.
+  (2015).
+\newblock Inesc-id: A regression model for large scale twitter sentiment
+  lexicon induction.
+\newblock In {\em Proceedings of the 9th International Workshop on Semantic
+  Evaluation (SemEval 2015)}, pages 613--618, Denver, Colorado. Association for
+  Computational Linguistics.
+
+\bibitem[Baroni et~al., 2014]{baroni2014don}
+Baroni, M., Dinu, G., and Kruszewski, G. (2014).
+\newblock Don't count, predict! a systematic comparison of context-counting vs.
+  context-predicting semantic vectors.
+\newblock In {\em Proceedings of the 52nd Annual Meeting of the Association for
+  Computational Linguistics}, pages 238--247. Association for Computational
+  Linguistics.
+
+\bibitem[Becker et~al., 2013]{avaya2013}
+Becker, L., Erhart, G., Skiba, D., and Matula, V. (2013).
+\newblock Avaya: Sentiment analysis on twitter with self-training and polarity
+  lexicon expansion.
+\newblock {\em Proceedings of the seventh international workshop on Semantic
+  Evaluation Exercises (SemEval-2013)}.
+
+\bibitem[Bifet and Frank, 2010]{bifet2010}
+Bifet, A. and Frank, E. (2010).
+\newblock Sentiment knowledge discovery in twitter streaming data.
+\newblock In {\em Proceedings of the 13th international conference on Discovery
+  science}, DS'10, pages 1--15, Berlin, Heidelberg. Springer-Verlag.
+
+\bibitem[Brown et~al., 1992]{brown1992class}
+Brown, P.~F., Desouza, P.~V., Mercer, R.~L., Pietra, V. J.~D., and Lai, J.~C.
+  (1992).
+\newblock Class-based n-gram models of natural language.
+\newblock {\em Computational linguistics}, 18(4):467--479.
+
+\bibitem[Calais~Guerra et~al., 2011]{calais2011bias}
+Calais~Guerra, P.~H., Veloso, A., Meira~Jr, W., and Almeida, V. (2011).
+\newblock From bias to opinion: a transfer-learning approach to real-time
+  sentiment analysis.
+\newblock In {\em Proceedings of the 17th ACM SIGKDD international conference
+  on Knowledge discovery and data mining}, pages 150--158. ACM.
+
+\bibitem[Conneau et~al., 2017]{conneau2017very}
+Conneau, A., Schwenk, H., Barrault, L., and Lecun, Y. (2017).
+\newblock Very deep convolutional networks for text classification.
+\newblock In {\em Proceedings of the 15th Conference of the European Chapter of
+  the Association for Computational Linguistics: Volume 1, Long Papers},
+  volume~1, pages 1107--1116.
+
+\bibitem[Felbo et~al., 2017]{FelboMSRL17}
+Felbo, B., Mislove, A., S{\o}gaard, A., Rahwan, I., and Lehmann, S. (2017).
+\newblock Using millions of emoji occurrences to learn any-domain
+  representations for detecting sentiment, emotion and sarcasm.
+\newblock In {\em Proceedings of the 2017 Conference on Empirical Methods in
+  Natural Language Processing, {EMNLP} 2017, Copenhagen, Denmark, September
+  9-11, 2017}, pages 1615--1625.
+
+\bibitem[Goldberg, 2016]{goldberg2016primer}
+Goldberg, Y. (2016).
+\newblock A primer on neural network models for natural language processing.
+\newblock {\em J. Artif. Intell. Res.(JAIR)}, 57:345--420.
+
+\bibitem[Goldberg and Levy, 2014]{goldberg2014word2vec}
+Goldberg, Y. and Levy, O. (2014).
+\newblock word2vec explained: deriving mikolov et al.'s negative-sampling
+  word-embedding method.
+\newblock {\em arXiv preprint arXiv:1402.3722}.
+
+\bibitem[Guerra et~al., 2014]{Guerra2014}
+Guerra, P.~C., Meira, Jr., W., and Cardie, C. (2014).
+\newblock Sentiment analysis on evolving social streams: How self-report
+  imbalances can help.
+\newblock In {\em Proceedings of the 7th ACM International Conference on Web
+  Search and Data Mining}, pages 443--452. ACM.
+
+\bibitem[Harris, 1954]{harris1954}
+Harris, Z. (1954).
+\newblock Distributional structure.
+\newblock {\em Word}, 10(23):146--162.
+
+\bibitem[Jurafsky and Martin, 2008]{JurafskyBook}
+Jurafsky, D. and Martin, J.~H. (2008).
+\newblock {\em Speech and Language Processing: An Introduction to Natural
+  Language Processing, Computational Linguistics, and Speech Recognition}.
+\newblock Prentice Hall, Upper Saddle River, NJ, USA, 2nd edition.
+
+\bibitem[Lau and Baldwin, 2016]{lau2016empirical}
+Lau, J.~H. and Baldwin, T. (2016).
+\newblock An empirical evaluation of doc2vec with practical insights into
+  document embedding generation.
+\newblock {\em arXiv preprint arXiv:1607.05368}.
+
+\bibitem[Le and Mikolov, 2014]{LeM14}
+Le, Q.~V. and Mikolov, T. (2014).
+\newblock Distributed representations of sentences and documents.
+\newblock In {\em Proceedings of the 31th International Conference on Machine
+  Learning}, pages 1188--1196.
+
+\bibitem[LeCun et~al., 1998]{lecun1998gradient}
+LeCun, Y., Bottou, L., Bengio, Y., and Haffner, P. (1998).
+\newblock Gradient-based learning applied to document recognition.
+\newblock {\em Proceedings of the IEEE}, 86(11):2278--2324.
+
+\bibitem[Levy and Goldberg, 2014]{levy2014neural}
+Levy, O. and Goldberg, Y. (2014).
+\newblock Neural word embedding as implicit matrix factorization.
+\newblock In {\em Advances in neural information processing systems}, pages
+  2177--2185.
+
+\bibitem[Mikolov et~al., 2013]{Mikolov2013}
+Mikolov, T., Sutskever, I., Chen, K., Corrado, G.~S., and Dean, J. (2013).
+\newblock Distributed representations of words and phrases and their
+  compositionality.
+\newblock In Burges, C., Bottou, L., Welling, M., Ghahramani, Z., and
+  Weinberger, K., editors, {\em Advances in Neural Information Processing
+  Systems 26}, pages 3111--3119. Curran Associates, Inc.
+
+\bibitem[Mohammad et~al., 2013]{Mohammad2013}
+Mohammad, S.~M., Kiritchenko, S., and Zhu, X. (2013).
+\newblock Nrc-canada: Building the state-of-the-art in sentiment analysis of
+  tweets.
+\newblock {\em Proceedings of the seventh international workshop on Semantic
+  Evaluation Exercises (SemEval-2013)}.
+
+\bibitem[Nakov et~al., 2013]{Semeval2013}
+Nakov, P., Rosenthal, S., Kozareva, Z., Stoyanov, V., Ritter, A., and Wilson,
+  T. (2013).
+\newblock Semeval-2013 task 2: Sentiment analysis in twitter.
+\newblock In {\em Proceedings of the seventh international workshop on Semantic
+  Evaluation Exercises}, pages 312--320, Atlanta, Georgia, USA. Association for
+  Computational Linguistics.
+
+\bibitem[Pang et~al., 2002]{Pang2002}
+Pang, B., Lee, L., and Vaithyanathan, S. (2002).
+\newblock Thumbs up? {Sentiment} classification using machine learning
+  techniques.
+\newblock In {\em Proceedings of the 2002 Conference on Empirical Methods in
+  Natural Language Processing}, pages 79--86. Association for Computational
+  Linguistics.
+
+\bibitem[Pennington et~al., 2014]{penningtonSM14}
+Pennington, J., Socher, R., and Manning, C.~D. (2014).
+\newblock Glove: Global vectors for word representation.
+\newblock In {\em Proceedings of the 2014 Conference on Empirical Methods in
+  Natural Language Processing, {EMNLP} 2014, October 25-29, 2014, Doha, Qatar,
+  {A} meeting of SIGDAT, a Special Interest Group of the {ACL}}, pages
+  1532--1543.
+
+\bibitem[Read, 2005]{Read2005}
+Read, J. (2005).
+\newblock Using emoticons to reduce dependency in machine learning techniques
+  for sentiment classification.
+\newblock In {\em Proceedings of the ACL Student Research Workshop}, ACLstudent
+  '05, pages 43--48, Stroudsburg, PA, USA. Association for Computational
+  Linguistics.
+
+\bibitem[Severyn and Moschitti, 2015]{Severyn2015}
+Severyn, A. and Moschitti, A. (2015).
+\newblock Twitter sentiment analysis with deep convolutional neural networks.
+\newblock In {\em Proceedings of the 38th International ACM SIGIR Conference on
+  Research and Development in Information Retrieval}, pages 959--962, New York,
+  NY, USA. ACM.
+
+\bibitem[Silva et~al., 2011]{Silva2011}
+Silva, I.~S., Gomide, J., Veloso, A., Meira, Jr., W., and Ferreira, R. (2011).
+\newblock Effective sentiment stream analysis with self-augmenting training and
+  demand-driven projection.
+\newblock In {\em Proceedings of the 34th International ACM SIGIR Conference on
+  Research and Development in Information Retrieval}, pages 475--484, New York,
+  NY, USA. ACM.
+
+\bibitem[Socher et~al., 2013]{socher2013recursive}
+Socher, R., Perelygin, A., Wu, J.~Y., Chuang, J., Manning, C.~D., Ng, A.~Y.,
+  and Potts, C. (2013).
+\newblock Recursive deep models for semantic compositionality over a sentiment
+  treebank.
+\newblock In {\em Proceedings of the 2013 Conference on Empirical Methods in
+  Natural Language Processing}, pages 1631--1642. Association for Computational
+  Linguistics.
+
+\bibitem[Tang et~al., 2014]{TangCol14}
+Tang, D., Wei, F., Qin, B., Zhou, M., and Liu, T. (2014).
+\newblock Building large-scale twitter-specific sentiment lexicon : {A}
+  representation learning approach.
+\newblock In {\em {COLING} 2014, 25th International Conference on Computational
+  Linguistics, Proceedings of the Conference: Technical Papers, August 23-29,
+  2014, Dublin, Ireland}, pages 172--182.
+
+\bibitem[Turian et~al., 2010]{turian2010word}
+Turian, J., Ratinov, L., and Bengio, Y. (2010).
+\newblock Word representations: a simple and general method for semi-supervised
+  learning.
+\newblock In {\em Proceedings of the 48th annual meeting of the association for
+  computational linguistics}, pages 384--394. Association for Computational
+  Linguistics.
+
+\bibitem[Turney and Littman, 2003]{turney2003measuring}
+Turney, P.~D. and Littman, M.~L. (2003).
+\newblock Measuring praise and criticism: Inference of semantic orientation
+  from association.
+\newblock {\em ACM Transactions on Information Systems (TOIS)}, 21(4):315--346.
+
+\bibitem[Zhou et~al., 2014]{Zhou2014}
+Zhou, Z., Zhang, X., and Sanderson, M. (2014).
+\newblock Sentiment analysis on twitter through topic-based lexicon expansion.
+\newblock In Wang, H. and Sharaf, M., editors, {\em Databases Theory and
+  Applications}, volume 8506 of {\em Lecture Notes in Computer Science}, pages
+  98--109. Springer International Publishing.
+
+\end{thebibliography}

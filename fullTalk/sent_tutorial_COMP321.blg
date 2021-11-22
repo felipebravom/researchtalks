@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: sent_tutorial_COMP321.aux
+The style file: apalike.bst
+Database file #1: ../bio.bib
+A bad cross reference---entry "FelboMSRL17"
+refers to entry "DBLP:conf/emnlp/2017", which doesn't exist
+Warning--I didn't find a database entry for "DBLP:conf/emnlp/2017"
+You've used 30 entries,
+            1935 wiz_defined-function locations,
+            674 strings with 11181 characters,
+and the built_in function-call counts, 15584 in all, are:
+= -- 1602
+> -- 612
+< -- 33
++ -- 211
+- -- 207
+* -- 1210
+:= -- 2456
+add.period$ -- 104
+call.type$ -- 30
+change.case$ -- 250
+chr.to.int$ -- 30
+cite$ -- 30
+duplicate$ -- 681
+empty$ -- 1110
+format.name$ -- 253
+if$ -- 3296
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 31
+newline$ -- 153
+num.names$ -- 94
+pop$ -- 284
+preamble$ -- 1
+purify$ -- 250
+quote$ -- 0
+skip$ -- 541
+stack$ -- 0
+substring$ -- 1153
+swap$ -- 217
+text.length$ -- 22
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 178
+warning$ -- 0
+while$ -- 131
+width$ -- 0
+write$ -- 413
+(There was 1 error message)

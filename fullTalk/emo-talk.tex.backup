@@ -1,0 +1,457 @@
+%\documentclass[mathserif]{beamer}
+\documentclass[handout]{beamer}
+%\usetheme{Goettingen}
+%\usetheme{Warsaw}
+\usetheme{Singapore}
+
+
+
+%\usetheme{Frankfurt}
+%\usetheme{Copenhagen}
+%\usetheme{Szeged}
+%\usetheme{Montpellier}
+%\usetheme{CambridgeUS}
+%\usecolortheme{}
+%\setbeamercovered{transparent}
+\usepackage[english, activeacute]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb}
+\usepackage{dsfont}
+\usepackage{graphics}
+\usepackage{cases}
+\usepackage{graphicx}
+\usepackage{pgf}
+\usepackage{epsfig}
+\usepackage{amssymb}
+\usepackage{multirow}	
+\usepackage{amstext}
+\usepackage[ruled,vlined,lined]{algorithm2e}
+\usepackage{amsmath}
+\usepackage{epic}
+\usepackage{epsfig}
+\usepackage{fontenc}
+\usepackage{framed,color}
+\usepackage{palatino, url, multicol}
+%\algsetup{indent=2em}
+\newcommand{\factorial}{\ensuremath{\mbox{\sc Factorial}}}
+\newcommand{\BIGOP}[1]{\mathop{\mathchoice%
+{\raise-0.22em\hbox{\huge $#1$}}%
+{\raise-0.05em\hbox{\Large $#1$}}{\hbox{\large $#1$}}{#1}}}
+\newcommand{\bigtimes}{\BIGOP{\times}}
+\vspace{-0.5cm}
+\title{Determining Word--Emotion Associations from Tweets\\ by Multi-Label Classification}
+\vspace{-0.5cm}
+\author[Felipe Bravo Márquez]{\footnotesize
+%\author{\footnotesize  
+ \textcolor[rgb]{0.00,0.00,1.00}{Felipe Bravo-Marquez} \\ Chief Supervisor: Bernhard Pfahringer \\  Supervisor: Eibe Frank\\ External Collaborator: Saif Mohammad (NRC-Canada)} 
+  
+ 
+%\vspace{-0.3cm}
+\institute{University of Waikato \\ Computer Science Department }
+
+\titlegraphic{\includegraphics[scale=0.3]{../../img/waikato.png}}
+
+
+
+\date{November 13, 2015}
+
+\begin{document}
+\begin{frame}
+\titlepage
+
+
+\end{frame}
+
+
+
+\begin{frame}{Social Media}
+\begin{scriptsize}
+\begin{itemize}
+ \item Microblogging services are increasingly being adopted by people in order to access and publish information.  
+ \item \textbf{Twitter}: Massively used Microblogging platform where users post messages limited to 140 characters. 
+ \item The words used in Twitter include many abbreviations, acronyms, and misspelled words, e.g., \textbf{lol}, \textbf{omg}, \textbf{hahaha}, \textbf{\#hatemonday}.
+\end{itemize}
+  \begin{figure}[h]
+        	\includegraphics[scale = 0.2]{pics/twitter.png}
+        \end{figure}
+
+\end{scriptsize}
+\end{frame}
+
+
+
+\begin{frame}{\#Emotional Tweets}
+\begin{scriptsize}
+\begin{itemize}
+ \item Posts in Twitter or \textbf{tweets} are provided \textbf{freely and voluntarily} by users.
+
+ \begin{enumerate}
+  \footnotesize{
+  \item Hey @Apple, pretty much all your products are amazing.  You blow minds every time you launch a new gizmo. That said, your hold music is crap.
+ \item \#windows sucks...  I want \#imac so bad!!!  why is it so damn expensive :( @apple please give me free imac and I will love you :D}
+ \end{enumerate}
+
+ 
+ \item Analysing the emotions behind those messages has important applications in product \textbf{marketing}, \textbf{politics}, and even for \textbf{stock market analysis}~\cite{bollen2011twitter}.
+ 
+   \begin{figure}[h]
+        	\includegraphics[scale = 0.5]{pics/tweetStock.jpeg}
+        \end{figure}
+\end{itemize}
+\end{scriptsize}
+
+
+
+
+\end{frame}
+
+\begin{frame}{The NRC Emotion Lexicon}
+\begin{scriptsize}\begin{itemize}
+ \item A well known lexical resource for \textbf{automatically analysing} emotions from textual data is the \textbf{NRC word-emotion association lexicon} (NRC-10) \cite{Saaif2012}
+ \item It contains more than 14,000 distinct English words \textbf{manually annotated} according to ten non-exclusive \textbf{emotional} and \textbf{polarity categories}.
+ 
+  \begin{figure}[htb]
+	\centering
+	 \includegraphics[scale=0.2]{pics/wheel_th.jpg}
+\end{figure}
+ 
+ \item  NRC-10 does not cover \textbf{informal expressions} used in Twitter. 
+ \item It suffers from \textbf{limitations} for analysing emotions from tweets.
+ \end{itemize}
+\end{scriptsize}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{Proposal}
+\begin{scriptsize}
+\begin{itemize}
+\item We study different \textbf{supervised models} for opinion lexicon expansion for  \textbf{Twitter}.
+\item The proposed models create Twitter-oriented opinion lexicons in an automatic way.
+\item They rely on two resources: a \textbf{corpus of tweets} and a \textbf{seed lexicon}.
+\item Each expanded word has a \textbf{probability distribution}, describing how positive, negative, and neutral it is.
+\end{itemize}
+\end{scriptsize}
+\end{frame}
+
+
+
+
+\begin{frame}{Previous work on emotion lexicon expansion}
+\begin{scriptsize}
+
+\begin{itemize} 
+ \item The expansion is normally done by exploiting \textbf{relations} between a \textbf{small seed lexicon} and \textbf{unknown words} from a \textbf{textual} resource.
+\item  Two type of resources can be used: a lexical database such as \textbf{WordNet}, or a \textbf{corpus of documents}. 
+\end{itemize}
+
+
+
+\end{scriptsize}
+\end{frame}
+
+
+
+
+\begin{frame}{Corpus-based lexicon expansion (2)}
+\begin{scriptsize}
+\begin{itemize}
+\item Turney et.al proposed an unsupervised measure called \textbf{semantic orientation} (SO) \cite{turney2003measuring} .
+\item It is calculated as the difference between the point-wise mutual information \textbf{PMI} of the word with a positive and a negative seed word.
+
+\begin{equation}
+ \operatorname{PMI}(term_{1}, term_{2})= \log_{2} \left ( \frac{Pr(term_{1} \wedge term_{2})}{Pr(term_{1})Pr(term_{2})} \right )
+\end{equation}
+
+\begin{equation}\label{eq:so}
+ \operatorname{SO}(word) = \operatorname{PMI}(word, ``excellent") - \operatorname{PMI}(word, ``poor")
+\end{equation}
+
+\item The PMI values are estimated by the number of \textbf{hits} returned by a search engine.
+
+\item The resulting SO score is a numerical value whose \textbf{sign} represents the word's polarity.
+
+\item The magnitude of the value represents the \textbf{sentiment intensity}. 
+
+
+\end{itemize}
+\end{scriptsize}
+\end{frame}
+
+
+
+
+\begin{frame}{Twitter lexicon expansion}
+\begin{scriptsize}
+\begin{itemize}
+\item Previous Twitter lexicon generation models compute the SO between \textbf{corpus words} and tweet-level sentiment \textbf{labels}. 
+\item The tweets are \textbf{automatically} labelled to polarity classes using \textbf{distant supervision} \cite{Mohammad2013, Zhou2014} or \textbf{self-training} \cite{avaya2013}. 
+\item  Distant supervision methods rely on strong \textbf{sentiment clues} found in the message such as \textbf{emoticons} \cite{Mohammad2013, Zhou2014} or \textbf{hashtags}  \cite{Mohammad2013} to label the messages.
+\item  Tweets where these clues are not observed are \textbf{discarded}. 
+%\item In the self-training approach \cite{avaya2013} a \textbf{message-level} polarity classifier is trained from a corpus of manually labelled tweets.
+%\item The classifier is used to tag a \textbf{large corpus} of \textbf{unlabelled tweets}. 
+%\item The \textbf{predicted labels} and the unlabelled tweets are used to compute the SO.
+\end{itemize}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+positive & negative \\ \hline
+:) & :( \\ 
+:-) & :-( \\ 
+:D & =( \\ 
+=) & :'(   \\ \hline
+\end{tabular}
+\end{table} 
+
+
+\end{scriptsize}
+\end{frame}
+
+
+
+\begin{frame}{Twitter lexicon expansion using word embeddings}
+\begin{scriptsize}
+\begin{itemize}
+
+\item  Word \textbf{embeddings} are low-dimensional continuous dense word vectors trained from document corpora.
+
+\item Most popular models are skip-gram \cite{Mikolov2013}, continuos bag-of-words \cite{Mikolov2013}, and Glove \cite{penningtonSM14}.
+
+  \begin{figure}[h]
+        	\includegraphics[scale = 0.45]{pics/cbow.png}
+        \end{figure}
+
+
+
+\item In \cite{amir2015SemEval}, they were used as \textbf{features} in a regression model for determining the association between Twitter words and \textbf{positive sentiment}. 
+
+\item In \cite{TangCol14}  \textbf{sentiment-specific} word embeddings are proposed  by combining the skip-gram model with emoticon-annotated tweets.
+\item These embeddings were used for \textbf{training} a word-level polarity classifier.
+\end{itemize}
+\end{scriptsize}
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}{Lexicon generation from unlabelled Tweets}
+\begin{scriptsize}
+\begin{itemize}
+\item We propose another supervised model for lexicon expansion referred to as the \textbf{tweet-centroid model}.
+\item The words are represented by \textbf{high-dimensional vectors} based on the context's where they occur. 
+\item In contrast to the previous approach the expansion is done from \textbf{unlabelled tweets}.
+\item It is inspired by the \textbf{Distributional Hypothesis} \cite{harris1954}: words occurring in the same \textbf{contexts} tend to have similar meanings.
+\item Or equivalently: ``a word is characterized by the \textbf{company} it keeps".
+\end{itemize}
+\end{scriptsize}
+\end{frame}
+
+
+\begin{frame}{Lexicon generation from unlabelled Tweets (2)}
+\begin{scriptsize}
+\begin{itemize}
+\item We treat a \textbf{whole tweet} as a word's context.
+\item We model tweets as \textbf{vectors} calculated from the \textbf{content}.
+\item We calculate word-level vectors based on the \textbf{centroids} of the \textbf{tweet-vectors} where a word occurs.
+\item We suggest that words exhibiting a \textbf{certain polarity} are more likely used in contexts expressing the \textbf{same polarity} than in contexts exhibiting a \textbf{different one}. 
+\end{itemize}
+\end{scriptsize}
+\end{frame}
+
+
+
+\begin{frame}{Lexicon generation from unlabelled Tweets (3)}
+\begin{scriptsize}
+Tweets in the collection are represented by \textbf{two vectors}:
+\begin{enumerate} 
+\item A word-frequency \textbf{bag-of-words vector}. 
+\item A semantic vector based on \textbf{word-clusters}. 
+\end{enumerate}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.3]{emo-model.pdf}
+	\label{fig:word_clash}
+\end{figure}
+
+\end{scriptsize}
+\end{frame}
+
+
+
+\begin{frame}{Bag-of-words model}
+\begin{scriptsize}
+\begin{itemize}
+\item Suppose we have a \textbf{corpus} $\mathcal{C}$ formed by $n$ tweets $t_1,\dots,t_n$.
+\item  Each \textbf{tweet} \textbf{$t$} is a sequence of words.
+\item  Let $\mathcal{V}$ be the \textbf{vocabulary} formed by the $m$ different words $w_1,$ $\dots, w_m$ found in $\mathcal{C}$.
+\item  The tweet-level bag-of-words model represents each tweet $t$ as a \textbf{m-dimensional vector} $\overrightarrow{t}$.
+\item Each dimension $\overrightarrow{t}_j$ corresponds to the \textbf{frequency} in which the word $w_j$ appears in $t$.   
+
+
+\end{itemize}
+\end{scriptsize}
+\end{frame}
+
+
+
+\begin{frame}{Bag-of-words model (2)}
+\begin{scriptsize}
+\begin{itemize}
+
+\item We define the \textbf{word-tweet set} $\mathcal{W}(w)$ as the set of tweets in which $w$ is \textbf{observed}:
+\begin{equation}
+\mathcal{W}(w)=\{ t: w \in t, \forall t \in \mathcal{C}\}
+\end{equation}
+
+\item We define the word-level vector $\overrightarrow{w}$ as as the \textbf{centroid} of all tweet-vectors in which $w$ is used. 
+
+\item $\overrightarrow{w}$ is a m-dimensional vector in which each dimension $w_j$ is calculated as follows:
+\begin{equation}
+\overrightarrow{w}_j = \sum_{t \in \mathcal{W}(w)} \frac{f_j(t)}{|\mathcal{W}(w)|}
+\end{equation}
+
+\item Bag-of-words models tend to produce \textbf{high dimensional sparse vectors}.
+
+\end{itemize}
+\end{scriptsize}
+\end{frame}
+
+
+
+\begin{frame}{Word-clusters model}
+\begin{scriptsize}
+\begin{itemize}
+
+\item Let be $c$ a \textbf{clustering} functions that \textbf{maps} the $m$ words to a \textbf{partition} of the vocabulary $\mathcal{S}$ of $k$ classes, with $k \ll m$. 
+\item This function is trained in an \textbf{unsupervised fashion} from a corpus of tweets using the \textbf{Brown clustering} algorithm \cite{brown1992class}. 
+\item This algorithm produces \textbf{hierarchical clusters} by maximising the mutual information of \textbf{bigrams}.
+\item These clusters have shown to be useful for tagging tweets according to \textbf{part-of-speech} classes \cite{twitterNLP}.
+\end{itemize}
+\end{scriptsize}
+\end{frame}
+
+
+\begin{frame}{Word-clusters model (2)}
+\begin{scriptsize}
+\begin{itemize}
+\item We \textbf{tag} the word sequences of the tweets from $\mathcal{C}$ with the clustering function $c$.
+\item We create a new \textbf{tweet-level} vector $\overrightarrow{tc}$ of $k$ dimensions based on the \textbf{frequency} of occurrence of a cluster $s$ in the tweet. 
+\item We take the \textbf{centroids} of the cluster-based vectors $\overrightarrow{tc}$ from the tweets of $\mathcal{W}(w)$, producing $k$-dimensional word vectors.
+
+\end{itemize}
+\end{scriptsize}
+\end{frame}
+
+
+
+\begin{frame}{Datasets}
+
+\begin{scriptsize}
+\begin{itemize}
+\item We take a \textbf{random sample} of 2.5 million English tweets from the Edinburgh Corpus and STS.
+\item  ED corpus represents a \textbf{realistic sample} from a stream of tweets.
+\item  STS was \textbf{intentionally manipulated} to over-represent the presence of subjective tweets. 
+\item We study these datasets to observe the effects of \textbf{manipulating} the collection of tweets for lexicon generation. 
+\item We tokenise the tweets from both collections and create the word-level vectors $\overrightarrow{w}$ and $\overrightarrow{wc}$.
+\end{itemize}
+\end{scriptsize}
+
+\begin{table}[htbp]
+\scriptsize
+\begin{center}
+\begin{tabular}{ l|r|r}
+\hline \hline
+Dataset & \multicolumn{1}{c|}{STS} & \multicolumn{1}{c}{ED} \\ \hline 
+\#tweets & $1,600,000$ & $2,500,000$ \\ 
+\#positive words & $2015$ & $2639$ \\ 
+\#negative words & $2621$ & $3642$ \\ 
+\#neutral words & $3935$ & $5085$ \\ 
+\#unlabelled words & $36,451$ & $67,692$ \\ 
+\#bag-of-words attributes & $45,022$ & $79,058$ \\ 
+\#cluster-vector attributes & $993$ & $999$ \\ \hline \hline
+\end{tabular}
+\end{center}
+\label{tab:corpstats}
+\end{table}
+\end{frame}
+
+
+
+
+\begin{frame}{Discussions}
+\begin{scriptsize}
+\begin{itemize}
+\item  Collections of tweets manipulated to over-represent subjective tweets are not necessarily \textbf{better} for lexicon generation than random collections of tweets.
+\item The proposed technique relies on resources that are relatively \textbf{cheap} to obtain: a \textbf{seed lexicon}, and a collection of \textbf{unlabelled tweets}.
+\item Source code available: \url{http://www.cs.waikato.ac.nz/ml/sa/lex.html}.
+\end{itemize}
+\end{scriptsize}
+\end{frame}
+
+
+
+
+\begin{frame}{Future Work}
+\begin{scriptsize}
+\begin{itemize}
+\item Use the Tweet-centroid model for \textbf{emotion} classification using \textbf{multi-label classification}.
+\item Transfer other message-level attributes to the word-level, e.g., n-grams, POS-tags.
+\item Design a mechanism to discover opinion words in an \textbf{online fashion}.
+\end{itemize}
+
+
+
+
+\end{scriptsize}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Questions?}
+%\vspace{1.5cm}
+\begin{center}\LARGE Thanks for your Attention!\\ \end{center}
+
+\begin{columns}
+\begin{column}{0.55\textwidth}
+\begin{block}{Acknowledgments}
+\begin{itemize}\tiny
+	\item University of Waikato Doctoral Scholarship
+	\item Machine Learning Group at the University of Waikato
+	
+\end{itemize}
+\end{block}
+\end{column}
+\begin{column}{0.45\textwidth}
+\vspace{1.5cm}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.3]{../../img/waikato.png}
+\end{figure}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]\scriptsize
+\frametitle{References}
+\bibliography{../bio}
+\bibliographystyle{apalike}
+%\bibliographystyle{flexbib}
+\end{frame}  
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
