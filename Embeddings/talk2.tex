@@ -1,0 +1,252 @@
+\documentclass[10pt]{beamer}
+\usepackage[utf8x]{inputenc}
+\usepackage{hyperref}
+\usepackage{fontawesome}
+\usepackage{graphicx}
+\usepackage{tikzpagenodes}
+\usepackage[english]{babel}
+
+% ------------------------------------------------------------------------------
+% Use the beautiful metropolis beamer template
+% ------------------------------------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage{fontawesome}
+\usepackage{FiraSans}
+\mode<presentation>
+{
+  \usetheme[progressbar=foot,numbering=fraction,background=light]{metropolis}
+  \usecolortheme{default} % or try albatross, beaver, crane, ...
+  \usefonttheme{default}  % or try serif, structurebold, ...
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{caption}[numbered]
+  %\setbeamertemplate{frame footer}{My custom footer}
+}
+
+% ------------------------------------------------------------------------------
+% beamer doesn't have texttt defined, but I usually want it anyway
+% ------------------------------------------------------------------------------
+\let\textttorig\texttt
+\renewcommand<>{\texttt}[1]{%
+  \only#2{\textttorig{#1}}%
+}
+
+% ------------------------------------------------------------------------------
+% minted
+% ------------------------------------------------------------------------------
+\usepackage{minted}
+
+
+% ------------------------------------------------------------------------------
+% tcolorbox / tcblisting
+% ------------------------------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{codecolor}{HTML}{FFC300}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{most,listingsutf8,minted}
+
+\tcbset{tcbox width=auto,left=1mm,top=1mm,bottom=1mm,
+right=1mm,boxsep=1mm,middle=1pt}
+
+\newtcblisting{myr}[1]{colback=codecolor!5,colframe=codecolor!80!black,listing only,
+minted options={numbers=left, style=tcblatex,fontsize=\tiny,breaklines,autogobble,linenos,numbersep=3mm},
+left=5mm,enhanced,
+title=#1, fonttitle=\bfseries,
+listing engine=minted,minted language=r}
+
+
+% ------------------------------------------------------------------------------
+% Listings
+% ------------------------------------------------------------------------------
+\definecolor{mygreen}{HTML}{37980D}
+\definecolor{myblue}{HTML}{0D089F}
+\definecolor{myred}{HTML}{98290D}
+
+\usepackage{listings}
+
+% the following is optional to configure custom highlighting
+\lstdefinelanguage{XML}
+{
+  morestring=[b]",
+  morecomment=[s]{<!--}{-->},
+  morestring=[s]{>}{<},
+  morekeywords={ref,xmlns,version,type,canonicalRef,metr,real,target}% list your attributes here
+}
+
+\lstdefinestyle{myxml}{
+language=XML,
+showspaces=false,
+showtabs=false,
+basicstyle=\ttfamily,
+columns=fullflexible,
+breaklines=true,
+showstringspaces=false,
+breakatwhitespace=true,
+escapeinside={(*@}{@*)},
+basicstyle=\color{mygreen}\ttfamily,%\footnotesize,
+stringstyle=\color{myred},
+commentstyle=\color{myblue}\upshape,
+keywordstyle=\color{myblue}\bfseries,
+}
+
+
+% ------------------------------------------------------------------------------
+% The Document
+% ------------------------------------------------------------------------------
+\title{Exploring bias metric strategies in contextualized embeddings}
+\author{Humberto Rodrigues}
+\date{December 2021}
+\institute{Department of Computer Science\\
+University of Chile\\
+Santiago, Chile}
+
+\begin{document}
+\setbeamertemplate{frametitle continuation}{\usebeamerfont{frametitle}\MakeUppercase{\romannumeral\insertcontinuationcount}}
+
+\maketitle
+
+% \section{Introduction}
+
+\begin{frame}{Motivation}
+
+    \footnotesize \p{\textbf{Why is it important to deal with bias in word embeddings?}}
+    \begin{itemize}
+        \item{\scriptsize State-of-the-art implementations of the most important NLP tasks use a contextualized word embedding component inside them, and the bias they suffer is also reflected in the final result.}
+
+        \item{\scriptsize Even when metrics has been created for trying to measure bias in contextualized embeddings, there is not a clear path to standardized methods defined yet. }
+
+        \item{\scriptsize Finding a way to adapt metrics created for static embeddings to use them in contextualized ones can have a big impact in understanding and comparing how the presence of bias behaves, between these approaches. }
+
+        \item{\scriptsize being able to re-use well studied and tested metrics in contextualized embeddings is the first step for developing more effective debiasing strategies}
+
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Basic Concepts}
+
+\footnotesize \textbf{Word Embedding:} \scriptsize is an NLP technique that aims to represent words as a dense vector in a latent space, these representations will also try to model the intrinsic semantic relations they initially had in the natural language.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=7.5cm]{assets/wordEmbedding.png}
+\end{figure}
+
+\framebreak
+\footnotesize \textbf{Types of word embeddings}
+\begin{itemize}
+    \item{\scriptsize \textbf{Static word embedding}: \p{\scriptsize each word will have a fixed vector representation.}}
+    \item{\scriptsize \textbf{Contextualized word embedding}: \p{\scriptsize each word will have a different representation based on the sentence it appears in. }}
+\end{itemize}
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=10.5cm]{assets/word_embedding_types.jpg}
+\end{figure}
+
+\framebreak
+
+\footnotesize \textbf{Understanding bias}
+\begin{itemize}
+    \item{\scriptsize \textbf{What is Bias? :} \scriptsize We define bias as the act of treating individuals belonging to different social groups, genders, and religions unequally, which can be considered unfair.}
+    \item{\scriptsize \textbf{Bias in Word Embeddings:} \scriptsize could be understood as the closeness of one specific set of words to another in the latent space; for example, male pronouns and names are closer to profession or research words than the female ones.}
+\end{itemize}
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=8.5cm]{assets/genderBias.png}
+\end{figure}
+
+\framebreak
+\end{frame}
+\begin{frame}{This Research}
+
+\footnotesize \p{\textbf{What will we be doing?}}
+
+\begin{itemize}
+    \item{\scriptsize We want to define a strategy that allows us to apply static embedding bias metrics in contextualized models ELMO\cite{DBLP:journals/corr/abs-1802-05365} and BERT\cite{DBLP:journals/corr/abs-1810-04805}}.
+
+    \item{\scriptsize Additionally, we will be exploring some approaches created specifically for measuring bias in contextualized embeddings and compare their results against the adapted metrics. }
+
+     \item{\scriptsize If we are capable of isolate a word level embedding in ELMO and BERT, then most of the metrics defined for static representations can be applied to that result. This isolation process could not be a trivial task and represents the first step of this research.}
+
+     \item{\scriptsize The main challenge we will face is the contrast between the dynamic nature of contextualized representations against traditional static ones, and how that difference will imply an adjustment of the existing metrics.}
+
+\end{itemize}
+\end{frame}
+
+\framebreak
+\begin{frame}[fragile,allowframebreaks]{Our Methodology}
+
+\begin{enumerate}
+
+    \item{\scriptsize Develop a strategy that allows us to obtain a \textbf{word-level} representation given a contextualized embedding model, ELMO\cite{DBLP:journals/corr/abs-1802-05365} or BERT\cite{DBLP:journals/corr/abs-1810-04805}, a QUERY phrase and a TARGET word.} \\
+    \begin{enumerate}
+        \scriptsize{
+            \item{ BERT's tokenizer handles words as a collection of tokens. We need to design a strategy to obtain a whole word representation embedding. }
+
+            \item{ In contrast with BERT\cite{DBLP:journals/corr/abs-1810-04805}, ELMO\cite{DBLP:journals/corr/abs-1802-05365} works with word-level tokens. }
+        }
+    \end{enumerate}
+
+    \begin{figure}[htp]
+        \centering
+        \includegraphics[width=10.5cm]{assets/BERTS_tokenizer.jpg}
+    \end{figure}
+
+    \framebreak
+    \item{\scriptsize Design a method that allows us to deal with the dynamic nature of contextualized embeddings. }
+
+    \begin{enumerate}
+        \scriptsize{
+            \item{ Once we are able to obtain a word-level embedding, we need to apply a sampling strategy to take into account the changing nature of contextualized embeddings. }
+
+            \item{ Each sampled phrase will generate a different representation for the desired word. Then we can start applying metrics defined for static embeddings, and an aggregation function at the end. }
+        }
+
+    \end{enumerate}
+
+    \begin{figure}[htp]
+        \centering
+        \includegraphics[width=10.0cm]{assets/proposed_flow.jpg}
+    \end{figure}
+
+    \framebreak
+
+    \item{\scriptsize Compare if the metrics results are consistent in bias detection using the proposed flow.}
+
+    \begin{enumerate}
+        \scriptsize{
+            \item{Train a version of ELMO\cite{DBLP:journals/corr/abs-1802-05365}, BERT\cite{DBLP:journals/corr/abs-1810-04805}, word2vec\cite{DBLP:journals/corr/abs-1301-3781}, and glove\cite{pennington2014glove} models from zero, using the same corpus in all the scenarios.}
+
+            \item{Apply the implemented metrics over the trained models using the same query set.}
+
+            \item{Compare if adapted metrics can detect and measure bias in contextualized embeddings using the static embeddings results as a reference.}
+        }
+    \end{enumerate}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Expected contribution}
+\footnotesize \p{\textbf{How will we be helping?}}
+    \begin{itemize}
+        \item{\scriptsize Contextualized embeddings are used in the most important NLP downstream tasks. Defining a way to detect and measure bias is the first step for developing debiasing strategies that can have a big impact in daily-used applications.}
+
+        \item{\scriptsize We are looking forward to implementing our proposed flow as an expansion of WEFE \cite{wefe2020}, adding contextualized embedding metrics support.}
+
+        \item{\scriptsize It is possible that the adapted metrics are not capable of detecting bias in contextualized embeddings, this knowledge could serve as explored terrain leading to new approaches in solving this task. }
+    \end{itemize}
+\framebreak
+
+
+\end{frame}
+\begin{frame}[standout]
+    Thanks!
+\end{frame}
+
+\section{References}
+\begin{frame}[fragile, allowframebreaks]{References}
+    \bibliography{generic}
+    \bibliographystyle{abbrv}
+\end{frame}
+
+\end{document}
