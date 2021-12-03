@@ -11,10 +11,36 @@ Badilla, P., Bravo-Marquez, F., and P{\'e}rez, J. (2020).
 \newblock Wefe: The word embeddings fairness evaluation framework.
 \newblock In {\em IJCAI}, pages 430--436.
 
+\bibitem[Bojanowski et~al., 2016]{bojanowski2016enriching}
+Bojanowski, P., Grave, E., Joulin, A., and Mikolov, T. (2016).
+\newblock Enriching word vectors with subword information.
+\newblock {\em arXiv preprint arXiv:1607.04606}.
+
 \bibitem[Bravo-Marquez et~al., 2021]{bravo2021incremental}
 Bravo-Marquez, F., Khanchandani, A., and Pfahringer, B. (2021).
 \newblock Incremental word vectors for time-evolving sentiment lexicon
   induction.
 \newblock {\em Cognitive Computation}, pages 1--17.
+
+\bibitem[Harris, 1954]{harris1954}
+Harris, Z. (1954).
+\newblock Distributional structure.
+\newblock {\em Word}, 10(23):146--162.
+
+\bibitem[Mikolov et~al., 2013]{Mikolov2013}
+Mikolov, T., Sutskever, I., Chen, K., Corrado, G.~S., and Dean, J. (2013).
+\newblock Distributed representations of words and phrases and their
+  compositionality.
+\newblock In Burges, C., Bottou, L., Welling, M., Ghahramani, Z., and
+  Weinberger, K., editors, {\em Advances in Neural Information Processing
+  Systems 26}, pages 3111--3119. Curran Associates, Inc.
+
+\bibitem[Pennington et~al., 2014]{penningtonSM14}
+Pennington, J., Socher, R., and Manning, C.~D. (2014).
+\newblock Glove: Global vectors for word representation.
+\newblock In {\em Proceedings of the 2014 Conference on Empirical Methods in
+  Natural Language Processing, {EMNLP} 2014, October 25-29, 2014, Doha, Qatar,
+  {A} meeting of SIGDAT, a Special Interest Group of the {ACL}}, pages
+  1532--1543.
 
 \end{thebibliography}

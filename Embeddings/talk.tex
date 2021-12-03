@@ -64,55 +64,125 @@
 \end{frame}
 
 
-\begin{frame}{Word Vectors}
+\begin{frame}{Word Embeddings}
 \begin{scriptsize}
 \begin{itemize}
-\item A major component in neural networks for language is the use of an embedding
-layer.
-\item A mapping of discrete symbols to continuous vectors.
-\item  When embedding words, they transform from being isolated distinct symbols into mathematical
-objects that can be operated on.
+\item The first step in computationally working with written language is to represent words as mathematical objects  we can operate with.
+
+\item Representing words as numeric vectors a.k.a \textbf{embeddings} is a standard practice in \textbf{Natural Language Processing} (NLP).
+
+\item Word embeddings are a mapping of discrete symbols (i.e., words) to continuous vectors.
+
+
 \item Distance between vectors can be equated to distance between words.
 \item This makes easier to generalize the behavior from one word to another.
+
+\item Word embeddings have become a core component of natural language processing (NLP) downstream systems (e.g., sentiment analysis, machine translation, question answering).
+
+
 \end{itemize}
 \end{scriptsize}
 \end{frame}
 
 
-\begin{frame}{Distributional Vectors}
+\begin{frame}{Word Embeddings}
+\begin{figure}[h]
+  \includegraphics[scale=0.2]{pics/embeddings.png}
+\end{figure}
+Word embeddings can encode semantic and syntatic relationships between words.
+
+
+\end{frame}
+
+
+
+
+\begin{frame}{Distributional Hypothesis}
 \begin{scriptsize}
 \begin{itemize}
-\item \textbf{Distributional Hypothesis}: words occurring in the same \textbf{contexts} tend to have similar meanings.
-\item Or equivalently: ``a word is characterized by the \textbf{company} it keeps".
-\item In this talk we summarize our research addressing three limitations of static word embeddings: 1) fairness, 2) semantic change, and 3) polysemy.
+\item The construction of word embeddings from document corpora is based on the  \textbf{Distributional Hypothesis} \cite{harris1954}:
+\begin{quote}
+ Words occurring in the same \textbf{contexts} tend to have similar meanings.
+\end{quote}
+
+\item Or equivalently:
+\begin{quote}
+A word is characterized by the \textbf{company} it keeps.
+\end{quote}
+
+
+\item The idea is to map words occuring in similar contexts to similar vectors.
 
 \end{itemize}
 \end{scriptsize}
 \end{frame}
 
 
-\begin{frame}{PolyLM: a polysemous language model}
+\begin{frame}{Word Embeddings}
+\begin{figure}[h]
+  \includegraphics[scale=0.8]{pics/embeddings2.png}
+\end{figure}
+
+
+
+\end{frame}
+
+
+
+\begin{frame}{Word Embeddings Algorithms}
 \begin{scriptsize}
 \begin{itemize}
- \item A language model capable of automatically learning multiple meanings of a word (e.g. apple:apple, apple:company) \cite{ansell2021polylm}.
-\end{itemize}
-  \begin{figure}[h]
-        	\includegraphics[scale = 0.3]{pics/senseembeddings.png}
-        \end{figure}
+\item Word embeddings are build by training neural networks architectures on document corpora (e.g., books, papers, Wikipedia, tweets, the Web).
 
+\item These arquitectures formulate a predictive task (e.g., predict a missing word withing a contex window) in which word embeddings naturally arise from the network's parameters after training.
+
+\item Most popular models are:
+\begin{itemize}
+\scriptsize{
+\item Skip-gram negative sampling \cite{Mikolov2013}
+\item Continuous bag-of-words \cite{Mikolov2013}
+\item Glove \cite{penningtonSM14}
+\item FastText \cite{bojanowski2016enriching}.}
+\end{itemize}
+
+
+
+
+\end{itemize}
 \end{scriptsize}
 \end{frame}
 
-
-
-\begin{frame}{PolyLM: a polysemous language model}
+\begin{frame}{Skip-gram Model}
 
   \begin{figure}[h]
-        	\includegraphics[scale = 0.25]{pics/polylm.png}
+        	\includegraphics[scale = 0.4]{pics/skip_gram_net_arch.png}
         \end{figure}
-
+\footnotetext{Picture taken from:    \url{http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/}}
 
 \end{frame}
+
+
+\begin{frame}{Limitations of Word Embeddings}
+\begin{scriptsize}
+\begin{itemize}
+
+
+\item However they suffer from three major limitations:
+
+\begin{enumerate} \scriptsize{
+ \item \textbf{Fairness}: they are prone to inherit stereotypical social biases from the corpus they were built on.
+ \item \textbf{Change}: they are static. Thus they ignore words not observed during training and are unable to capture semantic drifts.
+ \item \textbf{Polysemy}: they fail to capture the polysemous nature of many words (e.g., apple:company, apple:fruit), conflating their multiple senses into a single point.
+}
+\end{enumerate}
+
+
+\item In this talk we will present our research addressing these three problems.
+
+\end{itemize}
+\end{scriptsize}
+\end{frame}
+
 
 
 \begin{frame}{WEFE: The Word Embeddings Fairness Evaluation Framework}
@@ -157,6 +227,34 @@ objects that can be operated on.
 
 \end{scriptsize}
 \end{frame}
+
+
+
+
+\begin{frame}{PolyLM: a polysemous language model}
+\begin{scriptsize}
+\begin{itemize}
+ \item A language model capable of automatically learning multiple meanings of a word (e.g. apple:apple, apple:company) \cite{ansell2021polylm}.
+\end{itemize}
+  \begin{figure}[h]
+        	\includegraphics[scale = 0.3]{pics/senseembeddings.png}
+        \end{figure}
+
+\end{scriptsize}
+\end{frame}
+
+
+
+\begin{frame}{PolyLM: a polysemous language model}
+
+  \begin{figure}[h]
+        	\includegraphics[scale = 0.29]{pics/polylm.png}
+        \end{figure}
+
+
+\end{frame}
+
+
 
 \begin{frame}
 \frametitle{Questions?}
