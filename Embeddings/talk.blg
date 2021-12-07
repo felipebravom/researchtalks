@@ -3,44 +3,44 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: talk.aux
 The style file: apalike.bst
 Database file #1: bio.bib
-You've used 7 entries,
+You've used 11 entries,
             1935 wiz_defined-function locations,
-            519 strings with 5222 characters,
-and the built_in function-call counts, 3622 in all, are:
-= -- 363
-> -- 147
-< -- 6
-+ -- 49
-- -- 49
-* -- 278
-:= -- 578
-add.period$ -- 22
-call.type$ -- 7
-change.case$ -- 57
-chr.to.int$ -- 7
-cite$ -- 7
-duplicate$ -- 158
-empty$ -- 258
-format.name$ -- 56
-if$ -- 760
+            550 strings with 6238 characters,
+and the built_in function-call counts, 5730 in all, are:
+= -- 580
+> -- 229
+< -- 9
++ -- 79
+- -- 77
+* -- 453
+:= -- 909
+add.period$ -- 35
+call.type$ -- 11
+change.case$ -- 91
+chr.to.int$ -- 11
+cite$ -- 11
+duplicate$ -- 242
+empty$ -- 409
+format.name$ -- 90
+if$ -- 1197
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 7
-newline$ -- 38
-num.names$ -- 23
-pop$ -- 69
+missing$ -- 11
+newline$ -- 58
+num.names$ -- 35
+pop$ -- 105
 preamble$ -- 1
-purify$ -- 57
+purify$ -- 91
 quote$ -- 0
-skip$ -- 128
+skip$ -- 194
 stack$ -- 0
-substring$ -- 272
-swap$ -- 52
-text.length$ -- 5
+substring$ -- 456
+swap$ -- 76
+text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 42
+type$ -- 66
 warning$ -- 0
-while$ -- 32
+while$ -- 50
 width$ -- 0
-write$ -- 93
+write$ -- 146

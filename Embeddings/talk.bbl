@@ -22,6 +22,18 @@ Bravo-Marquez, F., Khanchandani, A., and Pfahringer, B. (2021).
   induction.
 \newblock {\em Cognitive Computation}, pages 1--17.
 
+\bibitem[Caliskan et~al., 2017]{caliskan2017semantics}
+Caliskan, A., Bryson, J.~J., and Narayanan, A. (2017).
+\newblock Semantics derived automatically from language corpora contain
+  human-like biases.
+\newblock {\em Science}, 356(6334):183--186.
+
+\bibitem[Garg et~al., 2018]{garg2018word}
+Garg, N., Schiebinger, L., Jurafsky, D., and Zou, J. (2018).
+\newblock Word embeddings quantify 100 years of gender and ethnic stereotypes.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  115(16):E3635--E3644.
+
 \bibitem[Harris, 1954]{harris1954}
 Harris, Z. (1954).
 \newblock Distributional structure.
@@ -42,5 +54,20 @@ Pennington, J., Socher, R., and Manning, C.~D. (2014).
   Natural Language Processing, {EMNLP} 2014, October 25-29, 2014, Doha, Qatar,
   {A} meeting of SIGDAT, a Special Interest Group of the {ACL}}, pages
   1532--1543.
+
+\bibitem[Sweeney and Najafian, 2019]{sweeney2019transparent}
+Sweeney, C. and Najafian, M. (2019).
+\newblock A transparent framework for evaluating unintended demographic bias in
+  word embeddings.
+\newblock In {\em Proceedings of the 57th Annual Meeting of the Association for
+  Computational Linguistics}, pages 1662--1667.
+
+\bibitem[Tang et~al., 2014]{TangCol14}
+Tang, D., Wei, F., Qin, B., Zhou, M., and Liu, T. (2014).
+\newblock Building large-scale twitter-specific sentiment lexicon : {A}
+  representation learning approach.
+\newblock In {\em Proceedings of the 25th International Conference on
+  Computational Linguisticss}, pages 172--182. Association for Computational
+  Linguistics.
 
 \end{thebibliography}
