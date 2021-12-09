@@ -102,7 +102,7 @@ Word embeddings can encode semantic and syntatic relationships between words.
 \begin{frame}{Distributional Hypothesis}
 \begin{scriptsize}
 \begin{itemize}
-\item The construction of word embeddings from document corpora is based on the  \textbf{Distributional Hypothesis} \cite{harris1954}:
+\item The construction of word embeddings from document corpora is based on the  \textbf{Distributional Hypothesis} \cite{harris1954}: \\
 \begin{quote}
  Words occurring in the same \textbf{contexts} tend to have similar meanings.
 \end{quote}
@@ -113,7 +113,7 @@ A word is characterized by the \textbf{company} it keeps.
 \end{quote}
 
 
-\item The idea is to map words occuring in similar contexts to similar vectors.
+\item The idea of word embedding is to map words occurring in similar contexts to similar vectors.
 
 \end{itemize}
 \end{scriptsize}
@@ -159,7 +159,7 @@ A word is characterized by the \textbf{company} it keeps.
   \begin{figure}[h]
         	\includegraphics[scale = 0.4]{pics/skip_gram_net_arch.png}
         \end{figure}
-\footnotetext{Picture taken from:    \url{http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/}}
+\footnotetext{Picture taken from:    \url{https://towardsdatascience.com/word-embeddings-intuition-and-some-maths-to-understand-end-to-end-skip-gram-model-cab57760c745}}
 
 \end{frame}
 
@@ -190,7 +190,7 @@ A word is characterized by the \textbf{company} it keeps.
 
 \begin{frame}{Fairness in Word Embeddings}
 \begin{scriptsize}
- Word Embeddings have showed to exhibit undesireded associations between words for certain social groups (e.g., gender, race, religion):
+ Word embeddings have shown to exhibit \textbf{undesirable associations} for certain social groups (e.g., gender, race, religion):
 \begin{itemize}
 \item Black is to criminal as caucasian is to police.
 \item Man is to doctor as woman is to nurse.
@@ -205,20 +205,20 @@ A word is characterized by the \textbf{company} it keeps.
 \begin{scriptsize}
 
 \begin{itemize}
- \item \textbf{WEAT} \cite{caliskan2017semantics}:  Degree of association between two sets of target words and two sets of attribute words.
+ \item \textbf{WEAT} \cite{caliskan2017semantics}:  measures the degree of association between two sets of target words and two sets of attribute words.
 
  \begin{itemize}\scriptsize{
- \item Studies biases regarding ethnicity (in relation to pleasant-unpleasant words) and gender (in relation to occupations).}
+ \item The original paper focused on biases regarding ethnicity (in relation to pleasant-unpleasant words) and gender (in relation to occupations).}
  \end{itemize}
 
-\item \textbf{RND} \cite{garg2018word}: Compares the embeddings related to two different social group against a set of neutral words.
+\item \textbf{RND} \cite{garg2018word}: compares embeddings related to two different social groups against a set of neutral words.
  \begin{itemize}\scriptsize{
- \item Embeddings trained on different periods of time were evaluated to test to gender and ethnic biases. }
+ \item The paper evaluated gender and ethnic biases in embeddings trained over different time periods. }
  \end{itemize}
 
-\item \textbf{RNSB} \cite{sweeney2019transparent}:  KL divergence between the negative sentiment probability of the embeddings and a uniform distribution.
+\item \textbf{RNSB} \cite{sweeney2019transparent}:  measures the KL divergence between the negative sentiment probability of the embeddings and a uniform distribution.
  \begin{itemize}\scriptsize{
- \item Test a set of national origin identity terms such as American, Mexican, and Canadian. }
+ \item The paper studied bias towards national origin identity terms such as American, Mexican, and Canadian. }
  \end{itemize}
 \end{itemize}
 
@@ -252,7 +252,7 @@ A word is characterized by the \textbf{company} it keeps.
 
  \item It encapsulates the input words of these metrics into standard objects called \textbf{queries}.
  \item Then, proceeds to quantify the bias of word embeddings using these queries along with different fairness metrics.
- \item It also allows for \textbf{ranking} multiple embeddings models by aggregating the previous scores.
+ \item It also allows us to \textbf{rank} various embedding models by aggregating the previous scores.
 \end{itemize}
   \begin{figure}[h]
         	\includegraphics[scale = 0.3]{pics/wefe.png}
@@ -335,7 +335,7 @@ we can say that \emph{$\mathbf{M_1}$ is less biased than model $\mathbf{M_2}$}.
 
 \begin{frame}{Case Study}
 \scriptsize{
-We used WEFE to rank various embedding models according to their aggregated biased with respect to to gender, religion and ethnicity:}
+We used WEFE to compare various embedding models according to their aggregated biased with respect to gender, religion and ethnicity:}
 
 
   \begin{figure}[h]

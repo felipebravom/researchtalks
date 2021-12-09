@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Debian) (preloaded format=pdflatex 2021.10.17)  7 DEC 2021 16:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Debian) (preloaded format=pdflatex 2021.10.17)  9 DEC 2021 10:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1199,11 +1199,6 @@ Overfull \hbox (21.90005pt too wide) in paragraph at lines 120--120
 [][][][][][][]  
  []
 
-
-Overfull \hbox (21.90005pt too wide) in paragraph at lines 120--120
-[][][][][][][]  
- []
-
 [4
 
 ]
@@ -1217,13 +1212,13 @@ Package pdftex.def Info: pics/embeddings2.png  used on input line 130.
  <./pics/embeddings2.png>] [6
 
 ]
-<pics/skip_gram_net_arch.png, id=120, 755.9442pt x 472.164pt>
+<pics/skip_gram_net_arch.png, id=120, 702.625pt x 409.53pt>
 File: pics/skip_gram_net_arch.png Graphic file (type png)
 <use pics/skip_gram_net_arch.png>
 Package pdftex.def Info: pics/skip_gram_net_arch.png  used on input line 164.
-(pdftex.def)             Requested size: 302.37231pt x 188.86224pt.
+(pdftex.def)             Requested size: 281.04501pt x 163.80908pt.
 
-Overfull \hbox (23.53519pt too wide) in paragraph at lines 164--164
+Overfull \hbox (2.20789pt too wide) in paragraph at lines 164--164
  [] 
  []
 
@@ -1233,9 +1228,15 @@ LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 1
 64.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-) [7
+)
+Overfull \hbox (235.7623pt too wide) in paragraph at lines 164--164
+\OT1/pcr/m/n/9 word-[]embeddings-[]intuition-[]and-[]some-[]maths-[]to-[]unders
+tand-[]end-[]to-[]end-[]skip-[]gram-[]model-[]cab57760c745$[]|  
+ []
 
- <./pics/skip_gram_net_arch.png>] [8
+[7
+
+ <./pics/skip_gram_net_arch.png (PNG copy)>] [8
 
 ] [9
 
@@ -1244,7 +1245,7 @@ File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 ] [11
 
 ]
-<pics/wefe.png, id=186, 927.465pt x 237.88875pt>
+<pics/wefe.png, id=185, 927.465pt x 237.88875pt>
 File: pics/wefe.png Graphic file (type png)
 <use pics/wefe.png>
 Package pdftex.def Info: pics/wefe.png  used on input line 262.
@@ -1256,7 +1257,7 @@ Package pdftex.def Info: pics/wefe.png  used on input line 262.
 ] [14
 
 ]
-<pics/wefedia.png, id=222, 1206.59479pt x 678.70956pt>
+<pics/wefedia.png, id=221, 1206.59479pt x 678.70956pt>
 File: pics/wefedia.png Graphic file (type png)
 <use pics/wefedia.png>
 Package pdftex.def Info: pics/wefedia.png  used on input line 334.
@@ -1264,25 +1265,25 @@ Package pdftex.def Info: pics/wefedia.png  used on input line 334.
  [15
 
  <./pics/wefedia.png>]
-<pics/weferanking.png, id=234, 882.29625pt x 475.7775pt>
+<pics/weferanking.png, id=233, 882.29625pt x 475.7775pt>
 File: pics/weferanking.png Graphic file (type png)
 <use pics/weferanking.png>
 Package pdftex.def Info: pics/weferanking.png  used on input line 345.
 (pdftex.def)             Requested size: 264.69092pt x 142.73434pt.
  [16
 
- <./pics/weferanking.png>] [17
+ <./pics/weferanking.png>]
+[17
 
 ]
-<pics/incdiagram.png, id=258, 655.44875pt x 483.8075pt>
+<pics/incdiagram.png, id=257, 655.44875pt x 483.8075pt>
 File: pics/incdiagram.png Graphic file (type png)
 <use pics/incdiagram.png>
 Package pdftex.def Info: pics/incdiagram.png  used on input line 384.
 (pdftex.def)             Requested size: 229.41049pt x 169.33516pt.
  [18
 
- <./pics/incdiagram.png>]
-[19
+ <./pics/incdiagram.png>] [19
 
 ]
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10.95> not available
@@ -1292,12 +1293,12 @@ LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <10.95> not available
  [20
 
 ]
-<pics/change1.png, id=297, 469.755pt x 390.45876pt>
+<pics/change1.png, id=296, 469.755pt x 390.45876pt>
 File: pics/change1.png Graphic file (type png)
 <use pics/change1.png>
 Package pdftex.def Info: pics/change1.png  used on input line 467.
 (pdftex.def)             Requested size: 117.43846pt x 97.61444pt.
-<pics/change.png, id=298, 449.68pt x 387.4475pt>
+<pics/change.png, id=297, 449.68pt x 387.4475pt>
 File: pics/change.png Graphic file (type png)
 <use pics/change.png>
 Package pdftex.def Info: pics/change.png  used on input line 467.
@@ -1305,7 +1306,7 @@ Package pdftex.def Info: pics/change.png  used on input line 467.
  [21
 
  <./pics/change1.png> <./pics/change.png>]
-<pics/senseembeddings.png, id=312, 949.5475pt x 506.89375pt>
+<pics/senseembeddings.png, id=311, 949.5475pt x 506.89375pt>
 File: pics/senseembeddings.png Graphic file (type png)
 <use pics/senseembeddings.png>
 Package pdftex.def Info: pics/senseembeddings.png  used on input line 492.
@@ -1315,7 +1316,7 @@ Package pdftex.def Info: pics/senseembeddings.png  used on input line 492.
  <./pics/senseembeddings.png>] [23
 
 ]
-<pics/polylm.png, id=336, 544.0325pt x 813.0375pt>
+<pics/polylm.png, id=335, 544.0325pt x 813.0375pt>
 File: pics/polylm.png Graphic file (type png)
 <use pics/polylm.png>
 Package pdftex.def Info: pics/polylm.png  used on input line 532.
@@ -1327,7 +1328,8 @@ LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
 (Font)              Font shape `OT1/phv/m/sl' tried instead on input line 561.
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <7> not available
 (Font)              Font shape `OT1/phv/m/sl' tried instead on input line 561.
- [25
+
+[25
 
 ] [26
 
@@ -1351,8 +1353,7 @@ LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <7> not available
 \tf@snm=\write8
 \openout8 = `talk.snm'.
 
-
-(./talk.aux)
+ (./talk.aux)
 Package rerunfilecheck Info: File `talk.out' has not changed.
 (rerunfilecheck)             Checksum: 225FAD3AA324E01EF7E719A2E8CE30DB;174.
  ) 
@@ -1380,9 +1381,9 @@ xlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/he
 lvetic/uhvro8a.pfb>
-Output written on talk.pdf (30 pages, 1468301 bytes).
+Output written on talk.pdf (30 pages, 1444605 bytes).
 PDF statistics:
- 489 PDF objects out of 1000 (max. 8388607)
+ 488 PDF objects out of 1000 (max. 8388607)
  400 compressed objects within 4 object streams
  78 named destinations out of 1000 (max. 500000)
  156 words of extra memory for PDF output out of 10000 (max. 10000000)
