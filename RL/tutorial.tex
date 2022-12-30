@@ -73,6 +73,8 @@ where
 
 \item $\gamma \in [0,1)$ is a discount factor.
 
+\item $R$ is a reward function.$R: S \rightarrow \mathcal{R}$.
+
 \end{itemize}
 
 
@@ -80,6 +82,50 @@ where
 
 \end{frame}
 
+
+
+\begin{frame}{Example}
+\scriptsize{
+\begin{itemize}
+\item Suppose that an agent is situated in the $4\times 3$ environment shown in the Figure 
+
+
+  \begin{figure}[h]
+        	\includegraphics[scale = 0.4]{pics/example.png}
+        \end{figure}
+
+\item Beginning in the start state, it must choose an action at each time step. 
+
+\item The interaction with the environment terminates when the agent reaches one of the goal states, marked +1 or –1.
+
+\end{itemize}
+
+
+} 
+
+\end{frame}
+
+
+\begin{frame}{Example}
+\scriptsize{
+\begin{itemize}
+\item The ``intended'' outcome occurs with probability 0.8, but with probability 0.2 the agent moves at right angles to the intended direction:
+
+  \begin{figure}[h]
+        	\includegraphics[scale = 0.4]{pics/example1.png}
+        \end{figure}
+
+\item A collision with a wall results in no movement.
+
+\item Transitions into the two terminal states have reward +1 and –1, respectively.
+
+\item All other transitions have a reward of –0.02 (to avoid the robot wasting time).
+\end{itemize}
+
+
+} 
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[allowframebreaks]\scriptsize
