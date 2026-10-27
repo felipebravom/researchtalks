@@ -60,7 +60,7 @@
   dasharr/.style={arr,dashed,draw=midgray},
 }
 
-\title{Many Minds, Bodies, and Chips}
+\title{Multi-Agents, Embodiment, and Chips}
 \subtitle{Where AI is heading, and who builds it}
 \author{Felipe Bravo-M\'arquez}
 \date{October 2026}
@@ -73,7 +73,7 @@
 {\setbeamertemplate{footline}{}
 \begin{frame}
   \vspace*{0.6cm}
-  {\color{navy}\fontsize{26}{30}\selectfont\bfseries Many Minds, Bodies, and Chips\par}
+  {\color{navy}\fontsize{22}{26}\selectfont\bfseries Multi-Agents, Embodiment, and Chips\par}
   \vspace{0.2cm}
   {\color{magenta}\rule{2.2cm}{1.5pt}}\par
   \vspace{0.3cm}
@@ -81,7 +81,7 @@
   \vspace{0.9cm}
   {\bfseries Felipe Bravo-M\'arquez}\par
   {\small Department of Computer Science, Universidad de Chile\\
-   National Center for Artificial Intelligence (CENIA) \;$\cdot$\; Iniciative of Data and Artificial Intelligene, Universidad de Chile\par}
+   National Center for Artificial Intelligence (CENIA) \;$\cdot$\; IDIA\par}
   \vspace{0.2cm}
   {\small\color{midgray} October 2026}
   \vfill
@@ -104,12 +104,12 @@
 \begin{columns}[T]
 \begin{column}{0.48\textwidth}
 \begin{tikzpicture}[scale=0.95]
-  \draw[->,thick,navy] (0,0) -- (5.6,0) node[below left,font=\scriptsize,text=black]{compute (log scale)};
-  \draw[->,thick,navy] (0,0) -- (0,3.6) node[above,font=\scriptsize,text=black]{error};
-  \draw[very thick,magenta,domain=0.35:3.9,samples=60] plot (\x,{0.35+2.6/(\x+0.35)});
-  \draw[very thick,magenta,dashed,domain=3.9:5.3,samples=20] plot (\x,{0.35+2.6/(\x+0.35)});
-  \fill[navy] (0.6,3.08) circle (1.6pt) (1.4,1.84) circle (1.6pt)
-              (2.3,1.33) circle (1.6pt) (3.2,1.08) circle (1.6pt);
+  \draw[->,thick,navy] (0,0) -- (5.6,0) node[below left,font=\scriptsize,text=black]{parameters $N$ (log scale)};
+  \draw[->,thick,navy] (0,0) -- (0,3.6) node[above,font=\scriptsize,text=black]{loss $L$ (log scale)};
+  \draw[very thick,magenta] (0.4,3.1) -- (3.9,1.2);
+  \draw[very thick,magenta,dashed] (3.9,1.2) -- (5.3,0.44);
+  \fill[navy] (0.6,3.03) circle (1.6pt) (1.4,2.52) circle (1.6pt)
+              (2.3,2.10) circle (1.6pt) (3.2,1.56) circle (1.6pt);
   \draw[dashed,midgray] (3.9,0) -- (3.9,3.2);
   \node[font=\scriptsize,midgray,align=center] at (4.65,2.9) {scaling\\frontier};
   \node[font=\Huge\bfseries,magenta] at (4.9,1.6) {?};
@@ -118,7 +118,7 @@
 \end{column}
 \begin{column}{0.5\textwidth}
 \small
-Scaling laws gave us a decade of predictable progress. But an empirical law is not a law of nature.
+On log--log axes, loss falls along a straight line as models grow. It is an empirical fit, not a law of nature.
 
 \vspace{0.3cm}
 Three things are now growing \emph{besides} model size:
@@ -416,9 +416,6 @@ But if intelligence leaves the screen, \alert{who builds the bodies} may matter 
 % 12. WHAT ABOUT US?
 % ============================================================
 \begin{frame}{And from the South?}
-\begin{columns}[T]
-\begin{column}{0.56\textwidth}
-\small
 We don't make the chips, but we are not spectators.
 \begin{itemize}
   \item \textbf{Open weights} let us run, adapt and audit models on our own soil, with our own data.
@@ -426,16 +423,6 @@ We don't make the chips, but we are not spectators.
   \item \textbf{Verification and data}: benchmarks, languages and problems that are ours.
   \item \textbf{Safety} is a shared job: AI and security communities must work together.
 \end{itemize}
-\end{column}
-\begin{column}{0.4\textwidth}
-\vspace{0.4cm}
-\begin{tikzpicture}
-  \node[draw=magenta,line width=1pt,rounded corners=4pt,text width=4.6cm,align=center,inner sep=10pt,font=\normalsize]
-  {\itshape AI looks like words and numbers.\\[3pt] It rests on chips, energy, bodies\\ and decisions.\\[6pt]
-   \upshape\small The questions are no longer\\ only technical.};
-\end{tikzpicture}
-\end{column}
-\end{columns}
 \vfill
 \begin{center}
 {\large\color{navy}\bfseries Thank you!}\\[2pt]
