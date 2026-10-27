@@ -305,29 +305,28 @@ the physical world is the largest domain where human text runs out and \alert{ex
 % ============================================================
 % 8. AI IS MADE OF ATOMS
 % ============================================================
-\begin{frame}{AI is made of atoms}
+\begin{frame}{The material base of AI}
 \begin{center}
-\begin{tikzpicture}[node distance=0.45cm]
-  \node[box,minimum width=1.8cm,minimum height=1cm] (eda) {design (EDA)\\{\scriptsize\color{midgray} USA}};
-  \node[box,right=of eda,minimum width=1.8cm,minimum height=1cm] (zeiss) {mirrors\\{\scriptsize\color{midgray} Zeiss, Germany}};
-  \node[box,right=of zeiss,minimum width=1.8cm,minimum height=1cm] (asml) {EUV litho\\{\scriptsize\color{midgray} ASML, NL}};
-  \node[box,right=of asml,minimum width=1.8cm,minimum height=1cm] (tsmc) {fabrication\\{\scriptsize\color{midgray} TSMC, Taiwan}};
-  \node[softbox,right=of tsmc,minimum width=1.6cm,minimum height=1cm] (dc) {data\\centers};
-  \draw[arr] (eda) -- (zeiss); \draw[arr] (zeiss) -- (asml);
-  \draw[arr] (asml) -- (tsmc); \draw[arr] (tsmc) -- (dc);
-  \foreach \n in {eda,asml,tsmc} \node[font=\tiny,text=magenta,above=1pt of \n] {\textbf{export control}};
-  \node[font=\scriptsize,midgray,below=0.15cm of tsmc,align=center] {$\sim$90\% of the most\\advanced chips};
-  \node[font=\scriptsize,midgray,below=0.15cm of asml,align=center] {$\sim$\$370M\\per machine};
+\begin{tikzpicture}
+  \tikzset{chain/.style={box,minimum width=3.1cm,minimum height=0.95cm,text width=3.0cm,align=center}}
+  \node[chain] (eda) at (0,0.75) {design software\\{\scriptsize\color{midgray} \mbox{Synopsys, Cadence} (USA)}};
+  \node[chain] (des) at (3.9,0.75) {chip designers\\{\scriptsize\color{midgray} NVIDIA, AMD, Apple}};
+  \node[chain] (zeiss) at (0,-0.75) {optics\\{\scriptsize\color{midgray} Zeiss (Germany)}};
+  \node[chain] (asml) at (3.9,-0.75) {EUV machines\\{\scriptsize\color{midgray} ASML (Netherlands)}};
+  \node[chain,minimum height=1.2cm] (tsmc) at (7.8,0) {fabrication\\{\scriptsize\color{midgray} TSMC (Taiwan)}};
+  \node[softbox,minimum width=1.7cm,minimum height=1.2cm,align=center] (dc) at (10.7,0) {data\\centers};
+  \draw[arr] (eda) -- (des); \draw[arr] (zeiss) -- (asml);
+  \draw[arr] (des.east) -- (tsmc.north west); \draw[arr] (asml.east) -- (tsmc.south west);
+  \draw[arr] (tsmc) -- (dc);
+  \node[font=\scriptsize,midgray,above=1pt of des] {they design, but do not manufacture};
+  \node[font=\scriptsize,midgray,below=1pt of asml] {$\sim$\$370M per machine};
+  \node[font=\scriptsize,midgray,below=1pt of tsmc,align=center] {$\sim$90\% of the most\\advanced chips};
 \end{tikzpicture}
 \end{center}
 \vspace{0.1cm}
 \small
-For thirty years value lived in software; generative AI brought hardware back to the centre.
-Running models on your own soil is now a matter of sovereignty.
-The most delicate link in the global AI chain is a mirror a few atomic layers thick.
-\vspace{0.15cm}
-
-\noindent Plus what we rarely see: \textbf{energy}, \textbf{water} and \textbf{minerals}.
+Generative AI brought hardware back to the centre. Running models on your own soil is now a matter of sovereignty.
+Underneath the chain: \textbf{energy}, \textbf{water} and \textbf{minerals}.
 \source{Miller (2022), \emph{Chip War}; CSIS (2022).}
 \end{frame}
 % NOTES: One company makes EUV machines; one supplier makes the mirrors.
@@ -417,12 +416,15 @@ But if intelligence leaves the screen, \alert{who builds the bodies} may matter 
 % ============================================================
 \begin{frame}{And from the South?}
 We don't make the chips, but we are not spectators.
+\small
 \begin{itemize}
-  \item \textbf{Open weights} let us run, adapt and audit models on our own soil, with our own data.
-  \item \textbf{Energy and minerals} are part of the AI chain, and Chile has both.
+  \item \textbf{Open weights}: run, adapt and audit models on our own soil, with our own data.
+  \item \textbf{Minerals}: nearly a quarter of the world's mined copper (grids, data centers); second producer of lithium (batteries).
+  \item \textbf{Energy}: some of the highest solar irradiance on Earth; 63\% renewable electricity in 2025, and $\sim$6\,TWh curtailed for lack of transmission.
   \item \textbf{Verification and data}: benchmarks, languages and problems that are ours.
   \item \textbf{Safety} is a shared job: AI and security communities must work together.
 \end{itemize}
+{\tiny\color{midgray} USGS, Mineral Commodity Summaries (2026); ACERA (2026).}
 \vfill
 \begin{center}
 {\large\color{navy}\bfseries Thank you!}\\[2pt]

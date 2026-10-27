@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.10.1)  27 OCT 2026 11:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.10.1)  27 OCT 2026 11:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1092,15 +1092,15 @@ LaTeX Font Info:    Font shape `T1/phv/m/it' in size <9> not available
 ]
 File: logos/dcc.pdf Graphic file (type pdf)
 <use logos/dcc.pdf>
-Package pdftex.def Info: logos/dcc.pdf  used on input line 433.
+Package pdftex.def Info: logos/dcc.pdf  used on input line 435.
 (pdftex.def)             Requested size: 41.93385pt x 21.33955pt.
 File: logos/cenia.png Graphic file (type png)
 <use logos/cenia.png>
-Package pdftex.def Info: logos/cenia.png  used on input line 433.
+Package pdftex.def Info: logos/cenia.png  used on input line 435.
 (pdftex.def)             Requested size: 47.42154pt x 14.22636pt.
 File: logos/idia.png Graphic file (type png)
 <use logos/idia.png>
-Package pdftex.def Info: logos/idia.png  used on input line 433.
+Package pdftex.def Info: logos/idia.png  used on input line 435.
 (pdftex.def)             Requested size: 39.7235pt x 15.6491pt.
  [12
 
@@ -1119,15 +1119,19 @@ Package pdftex.def Info: logos/idia.png  used on input line 433.
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `talk.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 27895 strings out of 467533
- 556210 string characters out of 5422138
- 963348 words of memory out of 5000000
- 56222 multiletter control sequences out of 15000+600000
- 701613 words of font info for 116 fonts, out of 8000000 for 9000
+ 27904 strings out of 467533
+ 556372 string characters out of 5422138
+ 964100 words of memory out of 5000000
+ 56232 multiletter control sequences out of 15000+600000
+ 698883 words of font info for 114 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,13n,123p,379b,1105s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr
@@ -1142,7 +1146,7 @@ sfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
 symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb
 8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr
 /share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on talk.pdf (12 pages, 262284 bytes).
+Output written on talk.pdf (12 pages, 262658 bytes).
 PDF statistics:
  162 PDF objects out of 1000 (max. 8388607)
  108 compressed objects within 2 object streams
